@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-//const items = require('../database-mysql');
+// const items = require('../database-mysql');
 const path = require('path');
 
 const app = express();
@@ -16,8 +16,6 @@ app.use(express.static(path.resolve(__dirname, '../react-client/dist')));
 //     res.json(data);
 //   }
 // };
-
-
 
 // app.get('*', (req, res) => {
 //   //res.send(`Page not found at ${req.params['0']}`);

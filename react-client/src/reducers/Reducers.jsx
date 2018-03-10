@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
-import Ingredients from './Ingredients';
-import Recipes from './Recipes';
-import MealPlan from './MealPlan';
+import ingredients from './Ingredients';
+import recipes from './Recipes';
+import calendar from './Calendar';
 
-const Reducers = combineReducers({
-  Ingredients,
-  Recipes,
-  MealPlan,
+const reducers = combineReducers({
+  ingredients,
+  recipes,
+  calendar,
 })
 
-export default Reducers;
+export default reducers;

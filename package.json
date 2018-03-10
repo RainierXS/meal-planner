@@ -1,16 +1,17 @@
 {
-  "name": "meal-planner",
+  "name": "react-starter-v1",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/index.js",
-    "start": "nodemon server/index.js",
-    "cstart": "concurrently \"npm start\" \"npm run react-dev\""
+    "start": "webpack -d --watch",
+    "cstart": "concurrently \"npm start\" \"npm run server-dev\"",
+    "build": "webpack -p"
   },
-  "author": "Justin Rutherford",
-  "license": "ISC",
+  "author": "Todos Innovations",
+  "license": "",
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
@@ -18,31 +19,36 @@
     "babel-plugin-react-html-attrs": "^2.1.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
-    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
-    "concurrently": "^3.5.1",
     "css-loader": "^0.28.8",
     "file-loader": "^1.1.6",
     "style-loader": "^0.19.1",
     "webpack": "^3.10.0"
   },
   "dependencies": {
+    "async": "^2.6.0",
     "axios": "^0.17.1",
+    "babel-polyfill": "^6.26.0",
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "mysql": "^2.15.0",
     "nodemon": "^1.14.11",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
-    "react-bootstrap": "^0.32.0",
+    "react-bootstrap": "^0.32.1",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "redux": "^3.7.2",
+    "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
     "url-loader": "^0.6.2",
     "uuid": "^3.2.1"
+  },
+  "engines": {
+    "node": "9.0.0"
   }
 }

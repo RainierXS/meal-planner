@@ -1,40 +1,23 @@
-const defaultState = [
-  {
-    id: 0,
-    name: "Paprika Chickem",
-    ingredients: [
-      {
-        id: 1,
-        quantity: 1,
-      },
-      {
-        id: 2,
-        quantity: .5,
-      }
-    ]
-  },
-  {
-    id: 1,
-    name: "Salad",
-    ingredients: [
-      {
-        id: 0,
-        quantity: 1,
-      },
-      {
-        id: 3,
-        quantity: .5,
-      },
-      {
-        id: 4,
-        quantity: .25,
-      },
-    ]
-  }
-]
+import { recipes } from './ReducerKeys';
 
-const Recipes = (state = defaultState, action) => {
+const defaultState = [];
+
+const RecipesReducer = (state = defaultState, action) => {
+  switch (action.type) {
+    case recipes.load:
+      break;
+    case recipes.loaded:
+      break;
+    case recipes.add:
+      break;
+    case recipes.remove:
+      break;
+    case recipes.changeRecipe:
+      break;
+    default:
+      break;
+  }
   return state;
 }
 
-export default Recipes;
+export default RecipesReducer;

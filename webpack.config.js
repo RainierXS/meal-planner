@@ -1,14 +1,22 @@
-let path = require('path');
+const path = require('path');
+const webpack = require('webpack');
 
-let SRC_DIR = path.join(__dirname, '/react-client/src');
-let DIST_DIR = path.join(__dirname, '/react-client/dist');
+const SRC_DIR = path.join(__dirname, '/react-client/src');
+const DIST_DIR = path.join(__dirname, '/react-client/dist');
+
+// creates js file containing common code across all bundles from entry points
+const commonsPlugin = new webpack.optimize.CommonsChunkPlugin({ name: 'common' });
 
 module.exports = {
-  entry: `${SRC_DIR}/index.jsx`,
+  // multiple entry points generates multiple bundles based on paths,
+  // using './admin-dist/bundle' as the key causes the bundle to be put
+  // in the /admin-dist folder because of the output filename [name]
+  entry: { bundle: `${SRC_DIR}/index.jsx` },
   output: {
-    filename: 'bundle.js',
+    filename: '[name].js',
     path: DIST_DIR,
   },
+  plugins: [commonsPlugin],
   module: {
     rules: [
       {
@@ -16,7 +24,7 @@ module.exports = {
         include: SRC_DIR,
         loader: 'babel-loader',
         query: {
-          presets: ['react', 'es2015', 'stage-0'],
+          presets: ['react', 'env', 'stage-0'],
           plugins: ['react-html-attrs', 'transform-class-properties', 'transform-decorators-legacy'],
         },
       },
@@ -49,7 +57,7 @@ module.exports = {
             loader: 'file-loader',
             options: {
               name: '[name].[ext]', outputPath: 'assets/images/',
-            }
+            },
           },
         ],
       },
@@ -58,5 +66,5 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx'],
-  }
+  },
 };

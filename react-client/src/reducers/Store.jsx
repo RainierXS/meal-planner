@@ -1,31 +1,25 @@
 import { createStore, applyMiddleware } from 'redux';
-import Reducers from './Reducers';
 import thunk from 'redux-thunk';
+import reducers from './Reducers';
+// import reduxLogger from 'redux-logger';
 
-import {addIngredient, removeIngredient} from '../actions/IngredientsActions';
-//const Store = createStore(Reducers);
+import { addIngredient } from '../actions/IngredientsActions';
 
+// adds support for redux dev tools in chrome
+// eslint-disable-next-line
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const logger = store => next => (action) => {
-  console.log("action dispatched", action);
-  next(action);
-}
+// const middleware = applyMiddleware(thunk, reduxLogger);
+const middleware = applyMiddleware(thunk);
 
-const Middleware = applyMiddleware(logger, thunk);
+const store = createStore(reducers, composeEnhancers(middleware));
 
-const Store = createStore(Reducers, Middleware);
-
-Store.subscribe(() =>
-  console.log("Store updated", Store.getState())
-)
-
-Store.dispatch(addIngredient("banana", 3, "daily"));
-Store.dispatch(addIngredient("apple", 4, "weekly"));
-Store.dispatch(addIngredient("banana", 3, "daily"));
-Store.dispatch(addIngredient("apple", 4, "weekly"));
-Store.dispatch(addIngredient("banana", 3, "daily"));
-Store.dispatch(addIngredient("apple", 4, "weekly"));
-//Store.dispatch(removeIngredient("aa"));
+store.dispatch(addIngredient('banana', 3, 'daily'));
+store.dispatch(addIngredient('apple', 4, 'weekly'));
+store.dispatch(addIngredient('banana', 3, 'daily'));
+store.dispatch(addIngredient('apple', 4, 'weekly'));
+store.dispatch(addIngredient('banana', 3, 'daily'));
+store.dispatch(addIngredient('apple', 4, 'weekly'));
 
 
-export default Store;
+export default store;

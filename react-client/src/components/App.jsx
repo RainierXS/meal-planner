@@ -1,20 +1,25 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
-import {removeIngredient} from '../actions/IngredientsActions';
+import { removeIngredient } from '../actions/IngredientsActions';
 
-@connect(state => ({
-    Ingredients: state.Ingredients
+@connect(store => ({
+  ingredients: store.ingredients,
 }))
 class App extends Component {
-  
+
   renderIngredients = () => {
-    return this.props.Ingredients.map((i) => {
+    return this.props.ingredients.map((i) => {
       const { id } = i;
-      return <p key={id}>{JSON.stringify(i)}<button onClick={() => this.props.dispatch(removeIngredient(id))}>X</button></p>
-    })
+      return (
+        <p key={id}>
+          {JSON.stringify(i)}
+          <button onClick={() => this.props.dispatch(removeIngredient(id))}>X</button>
+        </p>
+      );
+    });
   }
-    
+
   render() {
     return (
       <div className="container-fluid">
