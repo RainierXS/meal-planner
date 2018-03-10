@@ -11,5 +11,4 @@ const localhost = {
   database: 'meal_planner',
 };
 
-
 module.exports = localhost;

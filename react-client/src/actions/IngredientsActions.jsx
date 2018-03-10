@@ -1,9 +1,9 @@
 import uuidv4 from 'uuid/v4';
-import { Ingredients } from '../reducers/ReducerKeys';
+import { ingredients } from '../reducers/ReducerKeys';
 
 const addIngredient = (name, inventory, buyRate) => (dispatch) => {
   dispatch({
-    type: Ingredients.add,
+    type: ingredients.add,
     payload: {
       id: uuidv4(),
       name,
@@ -14,7 +14,7 @@ const addIngredient = (name, inventory, buyRate) => (dispatch) => {
 };
 
 const removeIngredient = id => ({
-  type: Ingredients.remove,
+  type: ingredients.remove,
   payload: id,
 });
 

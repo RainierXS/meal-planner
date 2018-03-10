@@ -1,31 +1,37 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { removeIngredient } from '../actions/IngredientsActions';
+import AppBar from 'material-ui/AppBar';
 
-@connect(store => ({
-  ingredients: store.ingredients,
-}))
+import IngredientsDrawer from '../partials/IngredientsDrawer';
+
+
+import './App.css';
+
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      ingredients: false,
+    };
+  }
 
-  renderIngredients = () => {
-    return this.props.ingredients.map((i) => {
-      const { id } = i;
-      return (
-        <p key={id}>
-          {JSON.stringify(i)}
-          <button onClick={() => this.props.dispatch(removeIngredient(id))}>X</button>
-        </p>
-      );
-    });
+  toggleDrawer = (drawer) => {
+    const state = {};
+    state[drawer] = !this.state[drawer];
+    this.setState(state);
   }
 
   render() {
     return (
-      <div className="container-fluid">
-        <div className="row">
-          {this.renderIngredients()}
-        </div>
+      <div className="app">
+        <AppBar
+          title="Menu Planner"
+          onLeftIconButtonClick={() => this.toggleDrawer('ingredients')}
+          iconClassNameRight="muidocs-icon-navigation-expand-more"
+        />
+
+        <IngredientsDrawer show={this.state.ingredients} toggle={() => this.toggleDrawer('ingredients')} />
       </div>
     );
   }

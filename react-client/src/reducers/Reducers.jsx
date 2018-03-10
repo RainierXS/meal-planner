@@ -7,6 +7,6 @@ const reducers = combineReducers({
   ingredients,
   recipes,
   calendar,
-})
+});
 
 export default reducers;

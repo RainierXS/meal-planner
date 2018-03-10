@@ -18,6 +18,6 @@ const RecipesReducer = (state = defaultState, action) => {
       break;
   }
   return state;
-}
+};
 
 export default RecipesReducer;
