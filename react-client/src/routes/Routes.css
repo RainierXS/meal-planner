@@ -1,0 +1,17 @@
+.root {
+  flex-grow: 1;
+  max-width: 80%;
+  margin: auto;
+  padding-top: 16px;
+}
+
+.paper {
+  padding: 12px;
+  text-align: center;
+  color: #aaa;
+}
+
+.week {
+  margin: auto;
+  margin: 0px !important;
+}

@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import IconButton from 'material-ui/IconButton';
-import FontIcon from 'material-ui/FontIcon';
 import Drawer from 'material-ui/Drawer';
-import MenuItem from 'material-ui/MenuItem';
-import DeleteForeverIcon from 'material-ui/svg-icons/action/delete-forever';
+import MenuItem from 'material-ui/Menu/MenuItem';
+import DeleteForeverIcon from 'material-ui-icons/DeleteForever';
 
 
 import { removeIngredient } from '../actions/IngredientsActions';
@@ -17,23 +15,19 @@ class IngredientsDrawer extends Component {
     const { id } = i;
     return (
       <MenuItem key={id}>
+        {i.name}
         <DeleteForeverIcon
-          style={{ verticalAlign: 'middle' }}
+          style={{ float: 'right' }}
           tooltip="Remove Item"
           onClick={() => this.props.dispatch(removeIngredient(id))}
-          disableTouchRipple
         />
-        {i.name}
       </MenuItem>
     );
   })
 
   render = () => (
-    <Drawer
-      docked={false}
-      open={this.props.show}
-      onRequestChange={this.props.toggle}
-    >
+    <Drawer anchor="right" open={this.props.show} onClose={this.props.toggle}>
+      <MenuItem disabled>Ingredients</MenuItem>
       <div>{this.renderIngredients()}</div>
     </Drawer>
   )

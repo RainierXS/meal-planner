@@ -29,26 +29,23 @@ module.exports = {
         },
       },
 
-      // creates css files in styles folder in dist, avoid duplicating filenames
-      // {
-      //   test: /\.css$/,
-      //   use: [
-      //     { loader: 'style-loader/url' },
-      //     {
-      //       loader: 'file-loader',
-      //       options: { name: '[name].css', outputPath: 'styles/' }
-      //     }
-      //   ]
-      // }
-      // end creates css files
-
       // puts css in style tag in head of page
       {
         test: /\.css$/,
         use: [
           { loader: 'style-loader' },
-          { loader: 'css-loader' },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              localIdentName: '[name]__[local]--[hash:base64:8]',
+            },
+          },
         ],
+      },
+      {
+        test: /\.scss$/,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
         test: /\.(gif|jpg|jpeg|png)$/,

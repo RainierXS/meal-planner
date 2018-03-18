@@ -1,9 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 import { Provider } from 'react-redux';
 import App from './components/App';
 import store from './reducers/Store';
@@ -12,9 +10,16 @@ import store from './reducers/Store';
 // http://stackoverflow.com/a/34015469/988941
 injectTapEventPlugin();
 
+const theme = createMuiTheme({
+  palette: {
+    type: 'dark', // Switching the dark mode on is a single property value change.
+  },
+});
+
 render(
-  <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+  <MuiThemeProvider theme={theme}>
     <Provider store={store}>
       <App />
     </Provider>
-  </MuiThemeProvider>, document.getElementById('app'));
+  </MuiThemeProvider>, document.getElementById('app')
+);
