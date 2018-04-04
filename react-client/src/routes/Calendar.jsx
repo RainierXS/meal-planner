@@ -1,23 +1,37 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, Component} from 'react';
 import PropTypes from 'prop-types';
 import Grid from 'material-ui/Grid';
 import Paper from 'material-ui/Paper';
 
+import CalendarDay from '../partials/CalendarDay';
+
 import styles from './Routes.css';
 
-const Calendar = (props) => {
-
-  const daysOfWeek = {
-    0: 'Sunday',
-    1: 'Monday',
-    2: 'Tuesday',
-    3: 'Wednesday',
-    4: 'Thursday',
-    5: 'Friday',
-    6: 'Saturday',
+class Calendar extends Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      month: 1,
+      year: 2018,
+    }
+  }
+  months = {
+    1: 'January',
+    2: 'February',
+    3: 'March',
+    4: 'April',
+    5: 'May',
+    6: 'June',
+    7: 'July',
+    8: 'August',
+    9: 'September',
+    10: 'October',
+    11: 'November',
+    12: 'December',
+    
   }
 
-  const monthInfo = (year, month) => {
+  monthInfo = (year, month) => {
     const data = {
       dayCount: new Date(year, month, 0).getDate(),
       firstDay: new Date(year, month - 1, 1).getDay(),
@@ -25,46 +39,48 @@ const Calendar = (props) => {
     return data;
   }
 
-  // TODO: move away from built in grid to custom one?
-  const makeMonth = (year, month) => {
-    const { dayCount, firstDay } = monthInfo(year, month);
+// TODO: move day generation to its own component
+  makeMonth = (y, m) => {
+    const month = m - 1;
+    const year = y;
+    const { dayCount, firstDay } = this.monthInfo(y, m);
+    const {blank, day, data, label} = styles;
     const grid = [];
-    grid.push((
-      <Grid item lg={firstDay+2} xs={7}/>
-    ));
-    for (let i = 1; i <= dayCount; i++) {
-      if ((i - firstDay) % 7 === 0) {
-        grid.push((
-          <Fragment>
-            <Grid item lg={3} xs={12} />
-            <Grid item lg={2} xs={12} />
-          </Fragment>
-        ));
-      }
-      grid.push((
-        <Grid item lg={1} xs={12} >
-          <Paper className={styles.paper}>
-            <h6>{daysOfWeek[new Date(year, month - 1, i).getDay()]}</h6>
-            <p>Testing</p>
-          </Paper>
-        </Grid>
-      ));
+    for(let i = 0; i < new Date(year, month, 1).getDay(); i++){
+      grid.push(
+        <div class={day+' '+blank}>
+        </div>
+      );
+    }
+    for(let i = 1; i <= dayCount; i++){
+      grid.push(
+        <CalendarDay day={i} month={month} year={year} />
+      );
+    }
+    for(let i = 6; i > new Date(year, month, dayCount).getDay(); i--){
+      grid.push(
+        <div class={day+' '+blank}>
+        </div>
+      );
     }
     return grid;
   }
 
-  return (
-    <div className={styles.root}>
-      <Grid container spacing={16}>
-        <Grid item lg={2} xs={7}/>
-        <Grid item lg={7} xs={12}>
-          <Paper className={styles.paper}>CALENDAR</Paper>
-        </Grid>
-        <Grid item lg={3} />
-        {makeMonth(2018, 2)}
-      </Grid>
-    </div>
-  );
+  render() {
+    const {month, year} = this.state;
+    const {calendarContainer, month: monthStyle, monthLabel, root} = styles;
+    return (
+      <div className={root}>
+        <input type="number" onChange={({target}) => this.setState({ month: target.value < 1 || target.value > 12 ? month : target.value })} value={month}/>
+        <div className={calendarContainer}>
+          <div className={monthStyle}>
+            <div className={monthLabel}>{this.months[month]} {year}</div>
+              {this.makeMonth(year, month)}
+          </div>
+        </div>
+      </div>
+    );
+  }
 };
 
 Calendar.propTypes = {

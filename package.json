@@ -6,8 +6,9 @@
   "scripts": {
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/index.js",
-    "start": "concurrently \"npm run react-dev\" \"npm run server-dev\"",
-    "build": "webpack -p"
+    "start": "concurrently \"npm run buildw\" \"npm run server-dev\"",
+    "build": "webpack -p --config webpack.prod.js",
+    "buildw": "webpack -p --watch --config webpack.prod.js"
   },
   "author": "Todos Innovations",
   "license": "",
@@ -21,10 +22,13 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "concurrently": "^3.5.1",
     "css-loader": "^0.28.8",
     "file-loader": "^1.1.6",
     "style-loader": "^0.19.1",
-    "webpack": "^3.10.0"
+    "uglifyjs-webpack-plugin": "^1.2.4",
+    "webpack": "^3.10.0",
+    "webpack-merge": "^4.1.2"
   },
   "dependencies": {
     "async": "^2.6.0",
