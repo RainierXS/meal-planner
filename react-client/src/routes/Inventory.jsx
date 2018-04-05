@@ -1,13 +1,111 @@
-import React from 'react';
+import React, {Fragment, Component} from 'react';
 import PropTypes from 'prop-types';
-import Grid from 'material-ui/Grid';
+import TextField from 'material-ui/TextField';
+import { InputLabel } from 'material-ui/Input';
+import { MenuItem } from 'material-ui/Menu';
+import { FormControl } from 'material-ui/Form';
+import Select from 'material-ui/Select';
+import Button from 'material-ui/Button';
+import DeleteForeverIcon from 'material-ui-icons/DeleteForever';
+import { connect } from 'react-redux';
 
-const Inventory = (props) => {
-  return (
-    <div>
-      Inventory
-    </div>
-  );
+import { addIngredient, removeIngredient } from '../actions/IngredientsActions';
+
+import styles from './Routes.css';
+
+@connect((store) => ({
+  ingredients: store.ingredients,
+}))
+class Inventory extends Component{
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: null,
+      inventory: null,
+      buyRate: '',
+    }
+  }
+  
+  renderIngredients = () => this.props.ingredients.map((i) => {
+    const { id, name, inventory, buyRate } = i;
+    return (
+      <div key={id}>
+        <DeleteForeverIcon
+          tooltip="Remove Item"
+          onClick={() => this.props.dispatch(removeIngredient(id))}
+        />
+        {name} {inventory} {buyRate}
+      </div>
+    );
+  })
+  
+  handleChange = name => e => {
+    this.setState({
+      [name]: e.target.value,
+    });
+  };
+  
+  handleSubmit = (e) => {
+    const {name, inventory, buyRate} = this.state;
+    e.preventDefault();
+    if(name && inventory && buyRate) {
+      this.props.dispatch(addIngredient(name, inventory, buyRate));
+      this.setState({
+        name: null,
+        inventory: null,
+        buyRate: '',
+      });
+    }
+  }
+  
+  render() {
+    const {root} = styles;
+    return (
+      <div className={root}>
+        <form noValidate autoComplete="off" onSubmit={this.handleSubmit}>
+          <TextField
+            id="name"
+            label="Name"
+            value={this.state.name}
+            onChange={this.handleChange('name')}
+            margin="normal"
+          />
+          <TextField
+            id="inventory"
+            label="Inventory"
+            value={this.state.inventory}
+            type="number"
+            onChange={this.handleChange('inventory')}
+            margin="normal"
+          />
+          <FormControl style={{minWidth:'200px'}}>
+            <InputLabel htmlFor="buyRate">Buy Rate</InputLabel>
+            <Select
+              value={this.state.buyRate}
+              onChange={this.handleChange("buyRate")}
+              inputProps={{
+                name: 'buyRate',
+                id: 'buyRate',
+              }}
+            >
+              <MenuItem value={''}>
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value="always">Always</MenuItem>
+              <MenuItem value="monthly">Monthly</MenuItem>
+              <MenuItem value="weekly">Weekly</MenuItem>
+              <MenuItem value="daily">Daily</MenuItem>
+            </Select>
+          </FormControl>
+          <Button type="submit" onClick={this.handleSubmit}>
+            Submit
+          </Button>
+        </form>
+        {this.renderIngredients()}
+      </div>
+    );
+  }
 };
 
 Inventory.propTypes = {

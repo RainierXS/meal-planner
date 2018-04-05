@@ -13,11 +13,11 @@ const CalendarDay = (props) => {
     6: 'Sat',
   }
   
-  const {day, month, year} = props;
-  const {day: dayStyle, data, label } = styles;
+  const { date } = props;
+  const {day, data, label } = styles;
   return (
-    <div class={dayStyle}>
-      <div class={label}>{day} {daysOfWeek[new Date(year, month, day).getDay()]}</div>
+    <div class={day}>
+      <div class={label}>{date.day} {daysOfWeek[new Date(date.year, date.month, date.day).getDay()]}</div>
       <div class={data}>+ -</div>
       <div class={data}>+ -</div>
       <div class={data}>+ -</div>

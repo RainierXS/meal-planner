@@ -2,11 +2,15 @@ import React, {Fragment, Component} from 'react';
 import PropTypes from 'prop-types';
 import Grid from 'material-ui/Grid';
 import Paper from 'material-ui/Paper';
+import { connect } from 'react-redux';
 
 import CalendarDay from '../partials/CalendarDay';
 
 import styles from './Routes.css';
 
+@connect((store) => ({
+  calendar: store.calendar,
+}))
 class Calendar extends Component{
   constructor(props) {
     super(props);
@@ -54,15 +58,15 @@ class Calendar extends Component{
     }
     for(let i = 1; i <= dayCount; i++){
       grid.push(
-        <CalendarDay day={i} month={month} year={year} />
+        <CalendarDay date={{day: i, month, year}} />
       );
     }
-    for(let i = 6; i > new Date(year, month, dayCount).getDay(); i--){
-      grid.push(
-        <div class={day+' '+blank}>
-        </div>
-      );
-    }
+    // for(let i = 6; i > new Date(year, month, dayCount).getDay(); i--){
+    //   grid.push(
+    //     <div class={day+' '+blank}>
+    //     </div>
+    //   );
+    // }
     return grid;
   }
 

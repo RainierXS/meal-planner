@@ -55,7 +55,7 @@ class App extends Component {
               </IconButton>
             </Toolbar>
           </AppBar>
-          <Route exact path="/" render={() => <Routes.Calendar />} />
+          <Route exact path="/" render={() => <Routes.Inventory />} />
           <Route path="/calendar" render={() => <Routes.Calendar />} />
           <Route path="/inventory" render={() => <Routes.Inventory />} />
           <Route path="/recipes" render={() => <Routes.Recipes />} />
