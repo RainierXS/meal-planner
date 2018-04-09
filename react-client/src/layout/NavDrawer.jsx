@@ -5,7 +5,7 @@ import MenuItem from 'material-ui/Menu/MenuItem';
 
 const NavDrawer = (props) => {
   const menuItems = [
-    { title: 'Calendar', to: '/' },
+    { title: 'Calendar', to: '/calendar' },
     { title: 'Inventory', to: '/inventory' },
     { title: 'Recipes', to: '/recipes' },
     { title: 'Shopping List', to: '/shopping-list' },

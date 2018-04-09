@@ -1,7 +1,5 @@
 import React, {Fragment, Component} from 'react';
 import PropTypes from 'prop-types';
-import Grid from 'material-ui/Grid';
-import Paper from 'material-ui/Paper';
 import { connect } from 'react-redux';
 
 import CalendarDay from '../partials/CalendarDay';
@@ -32,7 +30,7 @@ class Calendar extends Component{
     10: 'October',
     11: 'November',
     12: 'December',
-    
+
   }
 
   monthInfo = (year, month) => {
@@ -52,7 +50,7 @@ class Calendar extends Component{
     const grid = [];
     for(let i = 0; i < new Date(year, month, 1).getDay(); i++){
       grid.push(
-        <div class={day+' '+blank}>
+        <div className={day+' '+blank}>
         </div>
       );
     }
@@ -61,12 +59,12 @@ class Calendar extends Component{
         <CalendarDay date={{day: i, month, year}} />
       );
     }
-    // for(let i = 6; i > new Date(year, month, dayCount).getDay(); i--){
-    //   grid.push(
-    //     <div class={day+' '+blank}>
-    //     </div>
-    //   );
-    // }
+    for(let i = 6; i > new Date(year, month, dayCount).getDay(); i--){
+      grid.push(
+        <div className={day+' '+blank}>
+        </div>
+      );
+    }
     return grid;
   }
 
