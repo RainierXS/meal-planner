@@ -6,8 +6,9 @@
   "scripts": {
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/index.js",
-    "start": "concurrently \"npm run buildw\" \"npm run server-dev\"",
-    "build": "webpack -p --config webpack.prod.js",
+    "start": "concurrently \"npm run build\" \"npm run server-dev\"",
+    "startp": "concurrently \"npm run buildw\" \"npm run server-dev\"",
+    "build": "webpack -d --watch",
     "buildw": "webpack -p --watch --config webpack.prod.js"
   },
   "author": "Todos Innovations",

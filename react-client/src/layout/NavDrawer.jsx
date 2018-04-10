@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Drawer from 'material-ui/Drawer';
-import MenuItem from 'material-ui/Menu/MenuItem';
+// import MenuItem from 'material-ui/Menu/MenuItem';
 
 const NavDrawer = (props) => {
   const menuItems = [
@@ -17,12 +17,13 @@ const NavDrawer = (props) => {
       onClose={props.toggle}
     >
       {menuItems.map(i => (
-        <Link to={i.to} href={i.to} key={i.to}>
-          <MenuItem
+        <Link to={i.to} href={i.to} key={i.to} onClick={props.toggle}>
+          {i.title}
+          {/*<MenuItem
             onClick={props.toggle}
           >
             {i.title}
-          </MenuItem>
+          </MenuItem>*/}
         </Link>
       ))}
     </Drawer>

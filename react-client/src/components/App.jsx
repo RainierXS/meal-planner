@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';
-import IconButton from 'material-ui/IconButton';
-import MenuIcon from 'material-ui-icons/Menu';
-import RestaurantIcon from 'material-ui-icons/Restaurant';
-
 import Routes from '../routes/Routes';
-import IngredientsDrawer from '../partials/IngredientsDrawer';
+// import IngredientsDrawer from '../partials/IngredientsDrawer';
 import NavDrawer from '../layout/NavDrawer';
+import MenuBar from '../layout/MenuBar';
 
 import styles from './App.css';
 
@@ -33,28 +27,7 @@ class App extends Component {
     return (
       <Router>
         <div className={styles.root}>
-          <AppBar position="static">
-            <Toolbar>
-              <IconButton
-                className={styles.menuButton}
-                color="inherit"
-                aria-label="Menu"
-                onClick={() => this.toggleDrawer('navDrawer')}
-              >
-                <MenuIcon />
-              </IconButton>
-              <Typography className={styles.flex} variant="title" color="inherit">
-                Menu Planner
-              </Typography>
-              <IconButton
-                color="inherit"
-                aria-label="Ingredients"
-                onClick={() => this.toggleDrawer('ingredientsDrawer')}
-              >
-                <RestaurantIcon />
-              </IconButton>
-            </Toolbar>
-          </AppBar>
+          <MenuBar showMenu={this.toggleDrawer}/>
           <Route exact path="/" render={() => <Routes.Inventory />} />
           <Route path="/calendar" render={() => <Routes.Calendar />} />
           <Route path="/inventory" render={() => <Routes.Inventory />} />
@@ -64,10 +37,10 @@ class App extends Component {
             show={this.state.navDrawer}
             toggle={() => this.toggleDrawer('navDrawer')}
           />
-          <IngredientsDrawer
+          {/*<IngredientsDrawer
             show={this.state.ingredientsDrawer}
             toggle={() => this.toggleDrawer('ingredientsDrawer')}
-          />
+          />*/}
         </div>
       </Router>
     );

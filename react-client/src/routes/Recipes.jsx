@@ -1,7 +1,7 @@
 import React, {Fragment, Component} from 'react';
 import PropTypes from 'prop-types';
-import Grid from 'material-ui/Grid';
-import Paper from 'material-ui/Paper';
+// import Grid from 'material-ui/Grid';
+// import Paper from 'material-ui/Paper';
 import { connect } from 'react-redux';
 
 import styles from './Routes.css';
