@@ -1,5 +1,28 @@
 # Table of Contents
-
+- [Table of Contents](#table-of-contents)
+- [To Do](#to-do)
+  - [Overall Needs](#overall-needs)
+    - [Front End](#front-end)
+    - [Back End](#back-end)
+    - [Permissions](#permissions)
+  - [User login](#user-login)
+    - [Front End](#front-end)
+    - [Back End](#back-end)
+  - [Calendar](#calendar)
+    - [Front End](#front-end)
+    - [Back End](#back-end)
+  - [Inventory](#inventory)
+    - [Front End](#front-end)
+    - [Back End](#back-end)
+  - [Recipes](#recipes)
+    - [Front End](#front-end)
+    - [Back End](#back-end)
+  - [Shopping List](#shopping-list)
+    - [Front End](#front-end)
+    - [Back End](#back-end)
+  - [Profile Page](#profile-page)
+    - [Front End](#front-end)
+    - [Back End](#back-end)
 
 # To Do
 ## Overall Needs
