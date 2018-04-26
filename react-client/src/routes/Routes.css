@@ -55,6 +55,7 @@
 }
 
 .day .label{
+  display: block;
   background: #777;
   padding: 2px 0;
   width: 100%;
