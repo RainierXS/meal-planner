@@ -2,10 +2,11 @@ import React, {Fragment, Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import CalendarDay from '../partials/CalendarDay';
+import CalendarDay from '../partials/Calendar/CalendarDay';
+import CalendarMonth from '../partials/Calendar/CalendarMonth';
 
-import styles from './Routes.css';
-
+// import './Routes.css';
+ 
 @connect((store) => ({
   calendar: store.calendar,
 }))
@@ -17,6 +18,7 @@ class Calendar extends Component{
       year: 2018,
     }
   }
+  
   months = {
     1: 'January',
     2: 'February',
@@ -33,51 +35,15 @@ class Calendar extends Component{
 
   }
 
-  monthInfo = (year, month) => {
-    const data = {
-      dayCount: new Date(year, month, 0).getDate(),
-      firstDay: new Date(year, month - 1, 1).getDay(),
-    };
-    return data;
-  }
-
-// TODO: move day generation to its own component
-  makeMonth = (y, m) => {
-    const month = m - 1;
-    const year = y;
-    const { dayCount, firstDay } = this.monthInfo(y, m);
-    const {blank, day, data, label} = styles;
-    const grid = [];
-    for(let i = 0; i < new Date(year, month, 1).getDay(); i++){
-      grid.push(
-        <div className={day+' '+blank}>
-        </div>
-      );
-    }
-    for(let i = 1; i <= dayCount; i++){
-      grid.push(
-        <CalendarDay date={{day: i, month, year}} />
-      );
-    }
-    for(let i = 6; i > new Date(year, month, dayCount).getDay(); i--){
-      grid.push(
-        <div className={day+' '+blank}>
-        </div>
-      );
-    }
-    return grid;
-  }
-
   render() {
     const {month, year} = this.state;
-    const {calendarContainer, month: monthStyle, monthLabel, root} = styles;
     return (
-      <div className={root}>
+      <div className="root">
         <input type="number" onChange={({target}) => this.setState({ month: target.value < 1 || target.value > 12 ? month : target.value })} value={month}/>
-        <div className={calendarContainer}>
-          <div className={monthStyle}>
-            <div className={monthLabel}>{this.months[month]} {year}</div>
-              {this.makeMonth(year, month)}
+        <div className="calendarContainer">
+          <div className="month">
+            <div className="monthLabel">{this.months[month]} {year}</div>
+              <CalendarMonth month={month} year={year} />
           </div>
         </div>
       </div>

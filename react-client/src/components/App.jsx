@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Routes from '../routes/Routes';
-// import IngredientsDrawer from '../partials/IngredientsDrawer';
+import IngredientsDrawer from '../partials/IngredientsDrawer';
 import NavDrawer from '../layout/NavDrawer';
 import MenuBar from '../layout/MenuBar';
-
-import styles from './App.css';
 
 class App extends Component {
   constructor(props) {
@@ -26,7 +24,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className={styles.root}>
+        <div className=''>
           <MenuBar showMenu={this.toggleDrawer}/>
           <Route exact path="/" render={() => <Routes.Inventory />} />
           <Route path="/calendar" render={() => <Routes.Calendar />} />
@@ -37,10 +35,10 @@ class App extends Component {
             show={this.state.navDrawer}
             toggle={() => this.toggleDrawer('navDrawer')}
           />
-          {/*<IngredientsDrawer
+          <IngredientsDrawer
             show={this.state.ingredientsDrawer}
             toggle={() => this.toggleDrawer('ingredientsDrawer')}
-          />*/}
+          />
         </div>
       </Router>
     );

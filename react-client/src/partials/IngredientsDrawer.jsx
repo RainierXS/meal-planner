@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Drawer from 'material-ui/Drawer';
-// import MenuItem from 'material-ui/Menu/MenuItem';
-// import DeleteForeverIcon from 'material-ui-icons/DeleteForever';
 
 
 import { removeIngredient } from '../actions/IngredientsActions';
@@ -25,10 +22,10 @@ class IngredientsDrawer extends Component {
   })
 
   render = () => (
-    <Drawer anchor="right" open={this.props.show} onClose={this.props.toggle}>
+    <div anchor="right" open={this.props.show} onClose={this.props.toggle}>
       <li disabled>Ingredients</li>
       <div>{this.renderIngredients()}</div>
-    </Drawer>
+    </div>
   )
 }
 
