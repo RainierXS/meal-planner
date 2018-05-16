@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 
 import { addIngredient, removeIngredient } from '../actions/IngredientsActions';
 
-import styles from './Routes.css';
-
 @connect((store) => ({
   ingredients: store.ingredients,
 }))
@@ -52,9 +50,8 @@ class Inventory extends Component{
   }
   
   render() {
-    const {root} = styles;
     return (
-      <div className={root}>
+      <div className="root">
         <form noValidate autoComplete="off" onSubmit={this.handleSubmit}>
           <input
             value={this.state.name}
