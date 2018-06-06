@@ -27,7 +27,7 @@
 # To Do
 ## Overall Needs
 ### Front End
-  - [ ] Remove Material UI
+  - [x] Remove Material UI
   - [ ] Add Styled Components
 
 ### Back End
