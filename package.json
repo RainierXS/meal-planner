@@ -31,7 +31,7 @@
     "file-loader": "^1.1.6",
     "mysql": "^2.15.0",
     "node-sass": "^4.9.0",
-    "nodemon": "^1.14.11",
+    "nodemon": "^1.17.5",
     "sass-loader": "^7.0.3",
     "style-loader": "^0.19.1",
     "uglifyjs-webpack-plugin": "^1.2.4",

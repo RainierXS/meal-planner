@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Moment from 'moment';
 import styled from 'styled-components';
 
-import CalendarContainer from '../partials/Calendar';
+import CalendarContainer from '../components/Calendar';
 
 const Root = styled.div`
   flex-grow: 1;

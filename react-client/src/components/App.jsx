@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { HashRouter as Router, Route } from 'react-router-dom';
 
 import Routes from '../routes/Routes';
-import IngredientsDrawer from '../partials/IngredientsDrawer';
+import IngredientsDrawer from './IngredientsDrawer';
 import NavDrawer from '../layout/NavDrawer';
 import MenuBar from '../layout/MenuBar';
 
