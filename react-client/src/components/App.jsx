@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { HashRouter as Router, Route } from 'react-router-dom';
 
 import Routes from '../routes/Routes';
 import IngredientsDrawer from '../partials/IngredientsDrawer';
@@ -24,8 +24,8 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className=''>
-          <MenuBar showMenu={this.toggleDrawer}/>
+        <div className="app">
+          <MenuBar showMenu={this.toggleDrawer} />
           <Route exact path="/" render={() => <Routes.Inventory />} />
           <Route path="/calendar" render={() => <Routes.Calendar />} />
           <Route path="/inventory" render={() => <Routes.Inventory />} />

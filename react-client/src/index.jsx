@@ -9,9 +9,4 @@ import store from './reducers/Store';
 // http://stackoverflow.com/a/34015469/988941
 injectTapEventPlugin();
 
-
-render(
-    <Provider store={store}>
-      <App />
-    </Provider>, document.getElementById('app')
-);
+render(<Provider store={store}><App /></Provider>, document.getElementById('app'));

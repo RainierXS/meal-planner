@@ -1,58 +1,53 @@
-import React, {Fragment, Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Moment from 'moment';
+import styled from 'styled-components';
 
-import CalendarDay from '../partials/Calendar/CalendarDay';
-import CalendarMonth from '../partials/Calendar/CalendarMonth';
+import CalendarContainer from '../partials/Calendar';
 
-// import './Routes.css';
- 
-@connect((store) => ({
+const Root = styled.div`
+  flex-grow: 1;
+  max-width: 80%;
+  margin: auto;
+  padding-top: 16px;
+`;
+
+@connect(store => ({
   calendar: store.calendar,
 }))
-class Calendar extends Component{
+class Calendar extends Component {
   constructor(props) {
     super(props);
     this.state = {
       month: 1,
       year: 2018,
-    }
+    };
   }
-  
-  months = {
-    1: 'January',
-    2: 'February',
-    3: 'March',
-    4: 'April',
-    5: 'May',
-    6: 'June',
-    7: 'July',
-    8: 'August',
-    9: 'September',
-    10: 'October',
-    11: 'November',
-    12: 'December',
 
+  handleChange = (date) => {
+    const month = Number(Moment(date).format('MM'));
+    const year = Number(Moment(date).format('YYYY'));
+    this.setState({ month, year });
   }
 
   render() {
-    const {month, year} = this.state;
+    const { month, year } = this.state;
     return (
-      <div className="root">
-        <input type="number" onChange={({target}) => this.setState({ month: target.value < 1 || target.value > 12 ? month : target.value })} value={month}/>
-        <div className="calendarContainer">
-          <div className="month">
-            <div className="monthLabel">{this.months[month]} {year}</div>
-              <CalendarMonth month={month} year={year} />
-          </div>
-        </div>
-      </div>
+      <Root className="root">
+        <CalendarContainer
+          month={month}
+          year={year}
+          value={this.state.month}
+          onChange={this.handleChange}
+        />
+      </Root>
     );
   }
-};
+}
 
 Calendar.propTypes = {
-
+  calendar: PropTypes.arrayOf().isRequired,
 };
 
 export default Calendar;

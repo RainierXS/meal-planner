@@ -13,10 +13,10 @@ const MenuBar = (props) => {
           {/*<MenuIcon />*/}Menu
         </button>
         <h2 className=''>
-          Menu Planner
+          Menu Planner!
         </h2>
       </div>
-    </div>  
+    </div>
   )
 }
 
