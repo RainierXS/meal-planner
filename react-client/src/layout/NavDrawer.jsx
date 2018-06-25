@@ -9,13 +9,15 @@ const NavDrawer = (props) => {
     { title: 'Shopping List', to: '/shopping-list' },
   ];
 
+  const { show, toggle } = props;
+
   return (
     <div
-      open={props.show}
-      onClose={props.toggle}
+      open={show}
+      onClose={toggle}
     >
       {menuItems.map(i => (
-        <Link to={i.to} href={i.to} key={i.to} onClick={props.toggle}>
+        <Link to={i.to} href={i.to} key={i.to} onClick={toggle}>
           {i.title}
         </Link>
       ))}
