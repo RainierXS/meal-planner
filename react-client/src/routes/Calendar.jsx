@@ -7,10 +7,7 @@ import styled from 'styled-components';
 import CalendarContainer from '../components/Calendar';
 
 const Root = styled.div`
-  flex-grow: 1;
-  max-width: 80%;
   margin: auto;
-  padding-top: 16px;
 `;
 
 @connect(store => ({
@@ -47,7 +44,11 @@ class Calendar extends Component {
 }
 
 Calendar.propTypes = {
-  calendar: PropTypes.arrayOf().isRequired,
+  calendar: PropTypes.arrayOf(PropTypes.shape({})),
 };
+
+Calendar.defaultProps = {
+  calendar: [],
+}
 
 export default Calendar;

@@ -19,7 +19,6 @@ const Button = styled.button`
 `;
 const CalendarContainer = styled.div`
   min-height: 2rem;
-  width: 80%;
   margin:auto;
   padding:0;
   text-align: center;
@@ -33,13 +32,16 @@ const Label = styled.div`
   background: #888;
   border-radius: 2px;
   color: white;
-  font-size: .8em;
+  font-size: 16px;
   font-weight: bold;
   margin: auto;
   margin-bottom: 8px;
   width: 100%
-  @media (min-width: 767px) {
-    font-size: 1.2em;
+  @media (min-width: 50em) {
+    font-size: 2vw;
+  }  
+  @media (min-width: 75em) {
+    font-size: 1.5em;
   }
 `;
 const LabelButton = styled.button`

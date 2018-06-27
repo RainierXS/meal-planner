@@ -1,6 +1,6 @@
 import { calendar } from './ReducerKeys';
 
-const defaultState = [];
+const defaultState = [{test: 'hi'}];
 
 const CalendarReducer = (state = defaultState, action) => {
   switch (action.type) {
