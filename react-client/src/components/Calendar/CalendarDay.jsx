@@ -4,27 +4,38 @@ import styled from 'styled-components';
 // import '../routes/Routes.css';
 
 const Day = styled.div`
-  background: #aaa;
-  border-radius: 2px;
+  background: ${(props) => props.theme.accent};
+  border-radius: .3rem .3rem 0 0;
   display: inline-block;
   min-height: 2rem;
   margin-bottom: 8px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 2px;
-  width: 50%;
+  padding: 1px;
+  width: 49%;
+  margin: .25%;
 
-  @media (min-width: 992px) {
-    margin-left: .6%;
-    max-width: 13.6%;
-    width: 13.6%;
+  @media (min-width: 50em) {
+    max-width: calc((100%/7) - .8%);
+    width: calc((100%/7) - .8%);
+  }
+`;
+
+const BlankDay = styled(Day)`
+  display: none;
+  padding: 0;
+  opacity: 0;
+  @media (min-width: 50em) {
+    display: inline-block;
+    min-height: 0;
+    max-width: calc((100%/7) - .8%);
+    width: calc((100%/7) - .8%);
   }
 `;
 
 const Label = styled.div`
-  background: rgb(0, 45, 96);
-  border-radius: .25em;
-  color: white;
+  background: ${(props) => props.theme.secondary};
+  border-bottom: 1px solid ${(props) => props.theme.accent};
+  border-radius: .3rem .3rem 0 0;
+  color: ${(props) => props.theme.text};
   font-size: 75%;
   font-weight: 700;
   line-height: 1;
@@ -35,15 +46,15 @@ const Label = styled.div`
 `;
 
 const Data = styled.div`
-  background: #888;
-  color: white;
+  background: ${(props) => props.theme.tertiary};
+  color: ${(props) => props.theme.text};
   float: left;
   font-size: 90%;
   padding: 2px 0;
   width: 100%;
 
   &:nth-child(even) {
-    background: #999;
+    background: ${(props) => props.theme.fourth};;
   }
 `;
 
@@ -59,24 +70,37 @@ const CalendarDay = (props) => {
   };
 
   const { date } = props;
-  return (
-    <Day className="day">
-      <Label className="label">{date.day} {daysOfWeek[new Date(date.year, date.month, date.day).getDay()]}</Label>
-      <Data className="data">+ -</Data>
-      <Data className="data">+ -</Data>
-      <Data className="data">+ -</Data>
-    </Day>
-  );
+  return !props.blank 
+    ? (
+      <Day className="day">
+        <Label className="label">{date.day} {daysOfWeek[new Date(date.year, date.month, date.day).getDay()]}</Label>
+        <Data className="data">+ -</Data>
+        <Data className="data">+ -</Data>
+        <Data className="data">+ -</Data>
+      </Day>
+    ) : (
+      <BlankDay className="blank day" />
+    )
 };
 
 // #region CalendarDay propTypes
 CalendarDay.propTypes = {
+  blank: PropTypes.bool,
   date: PropTypes.shape({
-    day: PropTypes.number.isRequired,
-    month: PropTypes.number.isRequired,
-    year: PropTypes.number.isRequired,
-  }).isRequired,
+    day: PropTypes.number,
+    month: PropTypes.number,
+    year: PropTypes.number,
+  }),
 };
+
+CalendarDay.defaultProps = {
+  blank: false,
+  date: {
+    day: 12,
+    month: 31,
+    year: 1999,
+  }
+}
 // #endregion CalendarDay propTypes
 
 export default CalendarDay;

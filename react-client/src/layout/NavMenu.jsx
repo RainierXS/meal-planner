@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
 
-import { RouterIconButton } from '../components/Styles';
+import { RoutingIconButton } from '../components/SharedStyles';
 import Drawer from '../components/Drawer';
 
 const NavUl = styled.ul`
@@ -11,6 +11,13 @@ const NavUl = styled.ul`
   
   >li{
     list-style: none;
+  }
+`;
+
+const IconButton = styled(RoutingIconButton)`
+  color: ${(props) => props.theme.text};
+  >i::after {
+    box-shadow: ${(props) => props.theme.text} 0 0 8px 0px;
   }
 `;
 
@@ -27,8 +34,8 @@ const NavMenu = (props) => {
   return (
     <NavUl>
     {menuItems.map(i => (
-      <li key={i.to}>
-        <RouterIconButton
+      <div><li key={i.to}>
+        <IconButton
           className='icon-button'
           color="inherit"
           aria-label={i.title}
@@ -39,8 +46,8 @@ const NavMenu = (props) => {
           title={i.title}
         >
           <i class="material-icons">{i.icon}</i>
-        </RouterIconButton>
-      </li>
+        </IconButton>
+      </li></div>
     ))}
     </NavUl>
   );

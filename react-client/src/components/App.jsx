@@ -7,25 +7,33 @@ import IngredientsDrawer from './IngredientsDrawer';
 import MenuBar from '../layout/MenuBar';
 
 const FlexContainer = styled.div`
+  background: ${(props) => props.theme.bg};
+  color: ${(props) => props.theme.fg};
   display: flex;
   flex-flow: column wrap;
   height: 100vh;
 `;
 
 const Content = styled.div`
-  max-width: 100%;
-  margin-left: calc(64px + 1em);
+  color: ${(props) => props.theme.text};
+  margin: 0 1em 0 calc(64px + 1em);
   max-width: 90vw;
+  transition: margin .25s ease-in;
   @media (min-width: 1200px) {
     max-width: 1080px;
+  }
+  @media (max-width: 50em) {
+    margin: 0em 1em;
+    max-width: 100vh;
+    transition: margin .5s ease-in;
   }
 `;
 
 const ContentLabel = styled.div`
   max-width: 100%;
   max-width: 90vw;
+  height: 5em;
   text-align: center;
-  padding-top: 16px;
   align-items: stretch;
   flex-flow: row nowrap;
   display: flex;
@@ -36,6 +44,7 @@ const ContentLabel = styled.div`
 
   >* {
     flex-grow: 1;
+    align-self: center;
   }
 `;
 
@@ -60,7 +69,7 @@ class App extends Component {
         <FlexContainer className="app">
           <MenuBar showMenu={this.toggleDrawer} />
           <Content>
-            <ContentLabel><h3>Meal Planner!</h3></ContentLabel>
+            <ContentLabel><h3>Header1</h3></ContentLabel>
             <Route exact path="/" render={() => <Routes.Inventory />} />
             <Route path="/calendar" render={() => <Routes.Calendar />} />
             <Route path="/inventory" render={() => <Routes.Inventory />} />

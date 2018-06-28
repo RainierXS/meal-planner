@@ -12,9 +12,12 @@ const Button = styled.button`
   font-weight: inherit;
   height: 3em;
   width: 20%;
+  transition: box-shadow .25s ease-in;
+  border-radius: ${props => props.right ? '0 1rem 0 0' : '1rem 0 0 0'};
   &:hover, &:focus {
-    color: black;
+    color: ${(props) => props.theme.fg};
     outline: 0;
+    box-shadow: ${(props) => props.theme.text} 0 0 15px 0;
   }
 `;
 const CalendarContainer = styled.div`
@@ -29,9 +32,10 @@ const Icon = styled.i`
   font-weight: inherit;
 `;
 const Label = styled.div`
-  background: #888;
-  border-radius: 2px;
-  color: white;
+  background: ${(props) => props.theme.fourth};
+  border-radius: 1rem 1rem 0 0;
+  border-bottom: 1px solid ${(props) => props.theme.accent};
+  color: ${(props) => props.theme.text};
   font-size: 16px;
   font-weight: bold;
   margin: auto;
@@ -52,14 +56,19 @@ const LabelButton = styled.button`
   height: 3em;
   margin: 0 1%;
   width: 58%;
+  transition: box-shadow .25s ease-in;
   &:hover, &:focus {
-    color: black;
+    color: ${(props) => props.theme.fg};
     outline: 0;
+    box-shadow: ${(props) => props.theme.text} 0 0 15px 0;
   }
 `;
 const Month = styled.div`
+  background: darkslateblue;
+  border-radius: 1rem 1rem 0 0;
   min-height: 2rem;
   padding:0;
+  padding-bottom: .75em;
 `;
 
 const months = {
@@ -117,7 +126,7 @@ class Calendar extends Component {
                 : `${months[month]} ${year}`
               }
             </LabelButton>
-            <Button onClick={() => this.handleChange('+')}>
+            <Button onClick={() => this.handleChange('+')} right>
               <Icon className="material-icons">skip_next</Icon>
             </Button>
           </Label>

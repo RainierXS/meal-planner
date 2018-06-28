@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { IconButton } from '../components/Styles';
+import { IconButton } from '../components/SharedStyles';
 import NavMenu from './NavMenu';
 
 const FlexDiv = styled.div`
-  background: darkviolet;
-  border-right: 2px solid lime;
+  background: ${(props) => props.theme.primary};
+  border-right: 2px solid ${(props) => props.theme.accent};
   display: flex;
   flex-flow: column wrap;
   flex-basis: 100vh;
@@ -24,29 +24,9 @@ const FlexDiv = styled.div`
 const FloatIconButton = styled(IconButton)`
   position: fixed;
   float:right;
-  width:64px;
-  transition: inherit;
-  >i {
-    &::after {
-      content: '';
-      position: absolute;
-      width: 50%;
-      height: 50%;
-      right: .5em;
-      opacity: 0;
-      border-radius: 6px;
-      box-shadow: darkviolet 0 0 8px -4px;
-      transition: all .5s ease-in-out;
-    }
-  }
-  
-  @media (max-width: 50em) {
-    color: darkviolet;
-    >i {
-      &::after {
-        opacity: 1;
-      }
-    }
+  color: ${(props) => props.theme.text};
+  >i::after {
+    box-shadow: ${(props) => props.theme.text} 0 0 8px 0px;
   }
 `;
 
