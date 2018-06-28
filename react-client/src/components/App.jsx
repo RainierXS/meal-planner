@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { HashRouter as Router, Route } from 'react-router-dom';
+import { HashRouter as Router, Route, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Routes from '../routes/Routes';
-import IngredientsDrawer from './IngredientsDrawer';
 import MenuBar from '../layout/MenuBar';
 
 const FlexContainer = styled.div`
@@ -16,16 +15,16 @@ const FlexContainer = styled.div`
 
 const Content = styled.div`
   color: ${(props) => props.theme.text};
-  margin: 0 1em 0 calc(64px + 1em);
-  max-width: 90vw;
-  transition: margin .25s ease-in;
+  margin: 0em 1em;
+  max-width: 100vh;
+  transition: margin .5s ease-in;
   @media (min-width: 1200px) {
     max-width: 1080px;
   }
-  @media (max-width: 50em) {
-    margin: 0em 1em;
-    max-width: 100vh;
-    transition: margin .5s ease-in;
+  @media (min-width: 50em) {
+    margin: 0 1em 0 calc(64px + 1em);
+    max-width: 90vw;
+    transition: margin .25s ease-in;
   }
 `;
 
@@ -67,11 +66,11 @@ class App extends Component {
     return (
       <Router>
         <FlexContainer className="app">
-          <MenuBar showMenu={this.toggleDrawer} />
+          <MenuBar onClick={this.toggleDrawer} show={this.state.navDrawer} />
           <Content>
             <ContentLabel><h3>Header1</h3></ContentLabel>
-            <Route exact path="/" render={() => <Routes.Inventory />} />
-            <Route path="/calendar" render={() => <Routes.Calendar />} />
+            <Route exact path="/" render={() => <Redirect to="/inventory" />} />
+            <Route path="/calendar" render={(props) => <Routes.Calendar {...props}/>} />
             <Route path="/inventory" render={() => <Routes.Inventory />} />
             <Route path="/recipes" render={() => <Routes.Recipes />} />
             <Route path="/shopping-list" render={() => <Routes.ShoppingList />} />
