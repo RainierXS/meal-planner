@@ -13,15 +13,16 @@ class Calendar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      month: 1,
-      year: 2018,
+      data: [],
     };
+    this.date = Moment().startOf('month').format('YYYY-MM-DD');
+    this.path = '/calendar';
+    
   }
-
+  
   handleChange = (date) => {
-    const month = Number(Moment(date).format('MM'));
-    const year = Number(Moment(date).format('YYYY'));
-    this.setState({ month, year });
+    console.log(date);
+    this.date = date;
   }
 
   render() {
@@ -29,9 +30,6 @@ class Calendar extends Component {
     return (
       <Root>
         <CalendarContainer
-          month={month}
-          year={year}
-          value={this.state.month}
           onChange={this.handleChange}
         />
       </Root>

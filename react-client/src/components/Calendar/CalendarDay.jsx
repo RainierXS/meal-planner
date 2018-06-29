@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Moment from 'moment';
 import styled from 'styled-components';
 // import '../routes/Routes.css';
 
@@ -10,8 +11,34 @@ const Day = styled.div`
   min-height: 2rem;
   margin-bottom: 8px;
   padding: 1px;
+  position: relative;
   width: 49%;
   margin: .25%;
+  
+  &.today {
+    &::before, &::after {
+      content: '';
+      display: inline-block;
+      width: 100%;
+      position: absolute;
+      height: 100%;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: .3rem .3rem 0 0;
+      pointer-events: none;
+    }
+    &::before {
+      box-shadow: rgba(254,254,254,1) 0 0 6px 0;
+    }
+    &::after {
+      box-shadow: rgba(254,254,254,1) 0 0 10px 0 inset;
+    }
+    >.label {
+      background: ${(props) => props.theme.primary};
+    }
+  }
 
   @media (min-width: 50em) {
     max-width: calc((100%/7) - .8%);
@@ -70,9 +97,10 @@ const CalendarDay = (props) => {
   };
 
   const { date } = props;
+  const classes = Moment(date).isSame(Moment(), 'day') ? 'day today' : 'day';
   return !props.blank 
     ? (
-      <Day className="day">
+      <Day className={classes}>
         <Label className="label">{date.day} {daysOfWeek[new Date(date.year, date.month, date.day).getDay()]}</Label>
         <Data className="data">+ -</Data>
         <Data className="data">+ -</Data>

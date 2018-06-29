@@ -1,25 +1,35 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Moment from 'moment';
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
 
 import CalendarMonth from './CalendarMonth';
 
 const Button = styled.button`
   border: 0;
-  background: none;
+  background: rgba(255,255,255,0);
   color: inherit;
   font-weight: inherit;
   height: 3em;
   width: 20%;
-  transition: box-shadow .25s ease-in;
-  border-radius: ${props => props.right ? '0 1rem 0 0' : '1rem 0 0 0'};
-  &:hover, &:focus {
+  transition: box-shadow .5s ease-in, background .25s ease-in-out;
+  border-radius: ${props => {
+    if(props.right) return '0 1rem 0 0';
+    if(props.left) return '1rem 0 0 0 ';
+    return '0';
+  }};
+  &:hover {
     color: ${(props) => props.theme.fg};
-    outline: 0;
-    box-shadow: ${(props) => props.theme.text} 0 0 15px 0;
+    box-shadow: black 3px 3px 20px -7px inset;
   }
+  &:focus, &:hover {
+    outline: 0;
+  }
+  &:active {
+    background: rgba(255, 255, 255, .3);
+  } 
 `;
+
 const CalendarContainer = styled.div`
   min-height: 2rem;
   max-width: 1040px
@@ -48,20 +58,17 @@ const Label = styled.div`
     font-size: 1.5em;
   }
 `;
-const LabelButton = styled.button`
-  border: 0;
-  background: none;
-  color: inherit;
-  font-weight: inherit;
-  height: 3em;
+const LabelButton = styled(Button)`
   margin: 0 1%;
   width: 58%;
-  transition: box-shadow .25s ease-in;
-  &:hover, &:focus {
-    color: ${(props) => props.theme.fg};
-    outline: 0;
-    box-shadow: ${(props) => props.theme.text} 0 0 15px 0;
+  &>i { display: none; }
+  &::before {
+    ${({data, theme}) => `
+      content: '${data}';
+    `}
   }
+  &:hover>i { display: inherit; }
+  &:hover::before { content: ' '; }
 `;
 const Month = styled.div`
   background: darkslateblue;
@@ -91,12 +98,11 @@ class Calendar extends Component {
     super(props);
     this.state = {
       date: Moment().startOf('month'),
-      showReset: false,
     };
   }
 
   componentDidMount = () => {
-    this.setState({ date: Moment().startOf('month') }, () => this.props.onChange(this.state.date.format('YYYY-MM-DD')));
+    this.props.onChange(this.state.date.format('YYYY-MM-DD'));
   }
 
   handleChange = (dir) => {
@@ -112,25 +118,23 @@ class Calendar extends Component {
   }
 
   render() {
-    const { month, year } = this.props;
+    const { date } = this.state;
+    const YMD = date.format('YYYY/MM/DD').split('/').map((n) => Number(n));
     return (
       <CalendarContainer className="calendarContainer">
         <Month className="month">
           <Label className="monthLabel">
-            <Button onClick={() => this.handleChange('-')}>
+            <Button onClick={() => this.handleChange('-')} left>
               <Icon className="material-icons">skip_previous</Icon>
             </Button>
-            <LabelButton onMouseEnter={() => this.setState({showReset: true})} onMouseLeave={() => this.setState({showReset: false})}>
-              { this.state.showReset
-                ? <Icon className="material-icons">replay</Icon>
-                : `${months[month]} ${year}`
-              }
+            <LabelButton data={`${months[YMD[1]]} ${YMD[0]}`} onClick={() => this.handleChange('=')}>
+              <Icon className="material-icons">replay</Icon>
             </LabelButton>
             <Button onClick={() => this.handleChange('+')} right>
               <Icon className="material-icons">skip_next</Icon>
             </Button>
           </Label>
-          <CalendarMonth month={month} year={year} />
+          <CalendarMonth month={YMD[1]} year={YMD[0]} />
         </Month>
       </CalendarContainer>
     );
@@ -138,8 +142,6 @@ class Calendar extends Component {
 }
 
 Calendar.propTypes = {
-  month: PropTypes.number.isRequired,
-  year: PropTypes.number.isRequired,
   onChange: PropTypes.func.isRequired,
 };
 

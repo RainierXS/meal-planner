@@ -66,6 +66,10 @@ class App extends Component {
     this.setState(state);
   }
 
+  makeRoute = (r) => {
+    return <Route key={r.to} path={r.to} render={() => <r.route {...this.props} />} />
+  }
+
   render() {
     return (
       <Router>
@@ -74,10 +78,7 @@ class App extends Component {
           <Content>
             <ContentLabel><h3>Header1</h3></ContentLabel>
             <Route exact path="/" render={() => <Redirect to="/inventory" />} />
-            <Route path="/calendar" render={(props) => <Routes.Calendar {...props}/>} />
-            <Route path="/inventory" render={() => <Routes.Inventory />} />
-            <Route path="/recipes" render={() => <Routes.Recipes />} />
-            <Route path="/shopping-list" render={() => <Routes.ShoppingList />} />
+            {Routes.map(this.makeRoute)}
           </Content>
         </FlexContainer>
       </Router>

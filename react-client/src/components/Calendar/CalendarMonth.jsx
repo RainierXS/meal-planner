@@ -4,7 +4,6 @@ import CalendarDay from './CalendarDay';
 const CalendarMonth = (props) => {
   const month = props.month - 1;
   const { year } = props;
-
   const monthInfo = (y, m) => {
     const data = {
       dayCount: new Date(y, m, 0).getDate(),

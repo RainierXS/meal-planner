@@ -5,15 +5,16 @@ import { connect } from 'react-redux';
 import { Root } from '../components/SharedStyles';
 
 @connect((store) => ({
-  recipes: store.recipes,
-  ingredients: store.ingredients,
+  recipe: store.recipe,
+  ingredient: store.ingredient,
 }))
 class Recipes extends Component{
 
   render() {
     return (
       <Root>
-        Recipes
+        Recipes <br />
+        {JSON.stringify(this.props.recipe)}
       </Root>
     );
   }

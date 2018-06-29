@@ -1,12 +1,14 @@
 import React, {Fragment, Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import uuidv4 from  'uuid/v4';
 
-import { addIngredient, removeIngredient } from '../actions/IngredientsActions';
+import { addInventory, removeInventory } from '../actions/Inventory';
 import { Root } from '../components/SharedStyles';
 
 @connect((store) => ({
-  ingredients: store.ingredients,
+  ingredient: store.ingredient,
+  inventory: store.inventory,
 }))
 class Inventory extends Component{
   
@@ -14,19 +16,22 @@ class Inventory extends Component{
     super(props);
     this.state = {
       name: '',
-      inventory: '',
+      quantity: '',
+      type: 'poultry',
+      unit: 'count',
       buyRate: 'weekly',
     }
   }
   
-  renderIngredients = () => this.props.ingredients.map((i) => {
-    const { id, name, inventory, buyRate } = i;
+  renderIngredients = () => this.props.inventory.map((i) => {
+    const { id, quantity, unit, buyRate } = i;
+    const { name, type } = this.props.ingredient.filter(n => n.id === i.id)[0];
     return (
       <div key={id}>
         <button
-          onClick={() => this.props.dispatch(removeIngredient(id))}
+          onClick={() => this.props.dispatch(removeInventory(id))}
         >x</button>
-        {name} {inventory} {buyRate}
+        {name} {quantity} {type} {unit} {buyRate}
       </div>
     );
   })
@@ -38,13 +43,15 @@ class Inventory extends Component{
   };
   
   handleSubmit = (e) => {
-    const {name, inventory, buyRate} = this.state;
+    const payload = {...this.state};
     e.preventDefault();
-    if(name && inventory && buyRate) {
-      this.props.dispatch(addIngredient(name, inventory, buyRate));
+    if(payload.name && payload.quantity && payload.unit && payload.buyRate && payload.type) {
+      payload.id = uuidv4();
+      this.props.dispatch(addInventory(payload));
       this.setState({
         name: '',
-        inventory: '',
+        quantity: '',
+        unit: '',
         buyRate: 'weekly',
       });
     }
@@ -53,19 +60,47 @@ class Inventory extends Component{
   render() {
     return (
       <Root className="root">
+        Inventory
         <form noValidate autoComplete="off" onSubmit={this.handleSubmit}>
           <input
+            id="name"
+            placeholder="Ingredient"
             value={this.state.name}
             onChange={this.handleChange('name')}
             margin="normal"
           />
           <input
-            value={this.state.inventory}
+            id="quantity"
+            placeholder="Inventory"
+            value={this.state.quantity}
             type="number"
-            onChange={this.handleChange('inventory')}
+            onChange={this.handleChange('quantity')}
             margin="normal"
           />
           <select
+            id="type"
+            placeholder="Type"
+            value={this.state.type}
+            onChange={this.handleChange("type")}
+          >
+            <option value="poultry">Poultry</option>
+            <option value="fruit">Fruit</option>
+            <option value="spice">Spice</option>
+            <option value="misc">Misc</option>
+          </select>
+          <select
+            id="unit"
+            placeholder="Unit"
+            value={this.state.unit}
+            onChange={this.handleChange("unit")}
+          >
+            <option value="count">Count</option>
+            <option value="serving">Serving</option>
+            <option value="tsp">Teaspoon</option>
+          </select>
+          <select
+            id="buyRate"
+            placeholder="Buy Rate"
             value={this.state.buyRate}
             onChange={this.handleChange("buyRate")}
           >

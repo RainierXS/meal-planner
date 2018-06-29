@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import { Provider } from 'react-redux';
-import { ThemeProvider } from 'styled-components';
+import { ThemeProvider, injectGlobal } from 'styled-components';
 import App from './components/App';
 import store from './reducers/Store';
 
@@ -20,6 +20,17 @@ const theme = {
   fourth: 'rgba(128, 136, 137, 1)',
   accent: 'rgba(213, 241, 17, 1)',
 }
+
+injectGlobal`
+  html { height: 100%; width: 100%; }
+  body { 
+    height: 100%; width: 100%;
+    background: ${theme.bg};
+  }
+  *, ::after, ::before {
+    box-sizing: border-box;
+  }
+`
 
 render(
   <Provider store={store}>

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Routes from '../routes/Routes'
 
 import { RoutingIconButton } from '../components/SharedStyles';
 
@@ -20,16 +21,16 @@ const IconButton = styled(RoutingIconButton)`
 `;
 
 const NavMenu = (props) => {
-  const menuItems = [
-    { title: 'Calendar', to: '/calendar', icon: 'calendar_today' },
-    { title: 'Inventory', to: '/inventory', icon: 'fastfood' },
-    { title: 'Recipes', to: '/recipes', icon: 'receipt' },
-    { title: 'Shopping List', to: '/shopping-list', icon: 'list' },
-  ];
+  // const menuItems = [
+  //   { title: 'Calendar', to: '/calendar', icon: 'calendar_today' },
+  //   { title: 'Inventory', to: '/inventory', icon: 'fastfood' },
+  //   { title: 'Recipes', to: '/recipes', icon: 'receipt' },
+  //   { title: 'Shopping List', to: '/shopping-list', icon: 'list' },
+  // ];
   const { path, onClick } = props;
   return (
     <NavUl>
-    {menuItems.map(i => (
+    {Routes.map(i => (
       <div key={i.to}>
         <li>
           <IconButton
