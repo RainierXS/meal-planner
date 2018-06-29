@@ -2,15 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Moment from 'moment';
-import styled from 'styled-components';
 
-import { fadeInBottom } from '../components/Animations';
+import { Root } from '../components/SharedStyles';
 import CalendarContainer from '../components/Calendar';
-
-const Root = styled.div`
-  margin: auto;
-  animation: ${fadeInBottom} .5s ease-in-out;
-`;
 
 @connect(store => ({
   calendar: store.calendar,
@@ -33,7 +27,7 @@ class Calendar extends Component {
   render() {
     const { month, year } = this.state;
     return (
-      <Root className="root">
+      <Root>
         <CalendarContainer
           month={month}
           year={year}

@@ -15,15 +15,19 @@ const FlexContainer = styled.div`
 
 const Content = styled.div`
   color: ${(props) => props.theme.text};
-  margin: 0em 1em;
   max-width: 100vh;
+   > * {
   transition: margin .5s ease-in;
+    margin: 0em 2em;
+   }
   @media (min-width: 1200px) {
     max-width: 1080px;
   }
   @media (min-width: 50em) {
-    margin: 0 1em 0 calc(64px + 1em);
-    max-width: 90vw;
+     > * {
+      margin: 0 1em 0 calc(64px + 1em);
+     }
+    max-width: 100vw;
     transition: margin .25s ease-in;
   }
 `;

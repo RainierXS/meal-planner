@@ -22,7 +22,7 @@ const Button = styled.button`
 `;
 const CalendarContainer = styled.div`
   min-height: 2rem;
-  margin:auto;
+  max-width: 1040px
   padding:0;
   text-align: center;
 `;

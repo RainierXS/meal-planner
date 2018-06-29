@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { Root } from '../components/SharedStyles';
 
 const ShoppingList = (props) => {
   return (
-    <div className="root">
+    <Root>
       Shopping List
-    </div>
+    </Root>
   );
 };
 

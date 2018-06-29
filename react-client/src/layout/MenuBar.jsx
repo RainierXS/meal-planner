@@ -24,11 +24,9 @@ const FlexDiv = styled(FlexBase)`
     ? ''
     : `@media (max-width: 50em) {
       pointer-events: none; 
-      background: none; 
-      border-right: 2px solid transparent;
+      width: 1em;
     }` 
   }
-
 `;
 
 const FloatIconButton = styled(IconButton)`
@@ -62,6 +60,8 @@ const MenuButton = styled.div`
   @media (min-width: 50em) {
     transform: translateY(-64px);
   }
+  
+  ${({show}) => show ? 'transform: translateX(0)' : 'transform: translateX(1em)'};
 `;
 
 const Overlay = styled.div`
@@ -88,7 +88,7 @@ const MenuBar = (props) => {
   const { location: { pathname }, onClick, show } = props;
   return (
     <FlexDiv show={show}>
-      <MenuButton>
+      <MenuButton show={show}>
         <FloatIconButton
           className='icon-button'
           color="inherit"

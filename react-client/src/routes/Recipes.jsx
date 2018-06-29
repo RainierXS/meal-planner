@@ -2,6 +2,7 @@ import React, {Fragment, Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import { Root } from '../components/SharedStyles';
 
 @connect((store) => ({
   recipes: store.recipes,
@@ -11,9 +12,9 @@ class Recipes extends Component{
 
   render() {
     return (
-      <div className="root">
+      <Root>
         Recipes
-      </div>
+      </Root>
     );
   }
 };

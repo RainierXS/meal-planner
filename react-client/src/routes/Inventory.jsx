@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { addIngredient, removeIngredient } from '../actions/IngredientsActions';
+import { Root } from '../components/SharedStyles';
 
 @connect((store) => ({
   ingredients: store.ingredients,
@@ -51,7 +52,7 @@ class Inventory extends Component{
   
   render() {
     return (
-      <div className="root">
+      <Root className="root">
         <form noValidate autoComplete="off" onSubmit={this.handleSubmit}>
           <input
             value={this.state.name}
@@ -77,7 +78,7 @@ class Inventory extends Component{
           </button>
         </form>
         {this.renderIngredients()}
-      </div>
+      </Root>
     );
   }
 };
