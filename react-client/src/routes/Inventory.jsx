@@ -1,17 +1,17 @@
-import React, {Fragment, Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import uuidv4 from  'uuid/v4';
+import uuidv4 from 'uuid/v4';
 
 import { addInventory, removeInventory } from '../actions/Inventory';
 import { Root } from '../components/SharedStyles';
+import ContentLabel from '../components/ContentLabel';
 
-@connect((store) => ({
+@connect(store => ({
   ingredient: store.ingredient,
   inventory: store.inventory,
 }))
-class Inventory extends Component{
-  
+class Inventory extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,9 +20,31 @@ class Inventory extends Component{
       type: 'poultry',
       unit: 'count',
       buyRate: 'weekly',
+    };
+  }
+
+  handleChange = name => (e) => {
+    this.setState({
+      [name]: e.target.value,
+    });
+  };
+
+  handleSubmit = (e) => {
+    const payload = { ...this.state };
+    e.preventDefault();
+    if (payload.name && payload.quantity && payload.unit && payload.buyRate && payload.type) {
+      payload.id = uuidv4();
+      this.props.dispatch(addInventory(payload));
+      this.setState({
+        name: '',
+        quantity: '',
+        type: 'poultry',
+        unit: 'count',
+        buyRate: 'weekly',
+      });
     }
   }
-  
+
   renderIngredients = () => this.props.inventory.map((i) => {
     const { id, quantity, unit, buyRate } = i;
     const { name, type } = this.props.ingredient.filter(n => n.id === i.id)[0];
@@ -30,37 +52,17 @@ class Inventory extends Component{
       <div key={id}>
         <button
           onClick={() => this.props.dispatch(removeInventory(id))}
-        >x</button>
+        >x
+        </button>
         {name} {quantity} {type} {unit} {buyRate}
       </div>
     );
   })
-  
-  handleChange = name => e => {
-    this.setState({
-      [name]: e.target.value,
-    });
-  };
-  
-  handleSubmit = (e) => {
-    const payload = {...this.state};
-    e.preventDefault();
-    if(payload.name && payload.quantity && payload.unit && payload.buyRate && payload.type) {
-      payload.id = uuidv4();
-      this.props.dispatch(addInventory(payload));
-      this.setState({
-        name: '',
-        quantity: '',
-        unit: '',
-        buyRate: 'weekly',
-      });
-    }
-  }
-  
+
   render() {
     return (
       <Root className="root">
-        Inventory
+        <ContentLabel><h3>{this.props.title}</h3></ContentLabel>
         <form noValidate autoComplete="off" onSubmit={this.handleSubmit}>
           <input
             id="name"
@@ -81,7 +83,7 @@ class Inventory extends Component{
             id="type"
             placeholder="Type"
             value={this.state.type}
-            onChange={this.handleChange("type")}
+            onChange={this.handleChange('type')}
           >
             <option value="poultry">Poultry</option>
             <option value="fruit">Fruit</option>
@@ -92,7 +94,7 @@ class Inventory extends Component{
             id="unit"
             placeholder="Unit"
             value={this.state.unit}
-            onChange={this.handleChange("unit")}
+            onChange={this.handleChange('unit')}
           >
             <option value="count">Count</option>
             <option value="serving">Serving</option>
@@ -102,13 +104,13 @@ class Inventory extends Component{
             id="buyRate"
             placeholder="Buy Rate"
             value={this.state.buyRate}
-            onChange={this.handleChange("buyRate")}
+            onChange={this.handleChange('buyRate')}
           >
             <option value="daily">Daily</option>
             <option value="monthly">Monthly</option>
             <option value="weekly">Weekly</option>
           </select>
-          <button type="submit" onClick={this.handleSubmit}>
+          <button type="submit">
             Submit
           </button>
         </form>
@@ -116,7 +118,7 @@ class Inventory extends Component{
       </Root>
     );
   }
-};
+}
 
 Inventory.propTypes = {
 

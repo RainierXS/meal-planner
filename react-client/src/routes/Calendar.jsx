@@ -5,6 +5,7 @@ import Moment from 'moment';
 
 import { Root } from '../components/SharedStyles';
 import CalendarContainer from '../components/Calendar';
+import ContentLabel from '../components/ContentLabel';
 
 @connect(store => ({
   calendar: store.calendar,
@@ -17,9 +18,9 @@ class Calendar extends Component {
     };
     this.date = Moment().startOf('month').format('YYYY-MM-DD');
     this.path = '/calendar';
-    
+
   }
-  
+
   handleChange = (date) => {
     console.log(date);
     this.date = date;
@@ -29,6 +30,7 @@ class Calendar extends Component {
     const { month, year } = this.state;
     return (
       <Root>
+        <ContentLabel><h3>{this.props.title}</h3></ContentLabel>
         <CalendarContainer
           onChange={this.handleChange}
         />

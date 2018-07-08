@@ -12,7 +12,7 @@ import { fadeInBottom } from './Animations';
 //   height: 64px;
 //   padding: 1em;
 //   width: 100%;
-  
+
 //   >i {
 //     font-size: 2rem;
 //     margin: 0;
@@ -28,7 +28,7 @@ const iconButtonStyle = `
   width: 100%;
   width:64px;
   transition: inherit;
-  
+
   &:focus, &:hover {
     outline: none;
     >i {
@@ -38,7 +38,7 @@ const iconButtonStyle = `
       }
     }
   }
-  
+
   &.active{
     >i::after {
       opacity: 1;
@@ -62,7 +62,7 @@ const iconButtonStyle = `
       transition: all .5s ease-in-out;
     }
   }
-  
+
   @media (max-width: 50em) {
     >i {
       &::after {
@@ -82,6 +82,7 @@ export const RoutingIconButton = styled(LinkButton)`
 
 export const Root = styled.div`
   display: flex;
+  flex-flow: row wrap;
   margin: auto;
   animation: ${fadeInBottom} .5s ease-in-out;
 `;

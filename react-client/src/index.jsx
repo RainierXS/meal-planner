@@ -14,16 +14,18 @@ const theme = {
   bg: '#202020',
   fg: 'rgba(32, 32, 32, 1)',
   text: 'rgba(254, 254, 254, 1)',
+  placeholder: 'rgba(254, 254, 254, .5)',
   primary: 'darkslateblue',
   secondary: 'midnightblue',
   tertiary: 'rgba(148, 156, 157, 1)',
   fourth: 'rgba(128, 136, 137, 1)',
   accent: 'rgba(213, 241, 17, 1)',
+  warning: 'orangered'
 }
 
 injectGlobal`
   html { height: 100%; width: 100%; }
-  body { 
+  body {
     height: 100%; width: 100%;
     background: ${theme.bg};
   }
@@ -37,5 +39,5 @@ render(
     <ThemeProvider theme={theme}>
       <App />
     </ThemeProvider>
-  </Provider>, 
+  </Provider>,
 document.getElementById('app'));

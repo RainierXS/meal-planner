@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 const SRC_DIR = path.join(__dirname, '/react-client/src');
 const DIST_DIR = path.join(__dirname, '/react-client/dist');
@@ -16,16 +17,23 @@ module.exports = {
     filename: '[name].js',
     path: DIST_DIR,
   },
-  plugins: [commonsPlugin],
+  plugins: [commonsPlugin,
+    new BrowserSyncPlugin({
+      host: 'localhost',
+      port: 3001,
+      proxy: 'http://localhost:3000/',
+      files: ['./react-client/dist/*.js', './react-client/dist/*.html'],
+    }),
+  ],
   module: {
     rules: [
       {
-        test: /\.js(x)$/,
+        test: /\.js[x]?$/,
         include: SRC_DIR,
         loader: 'babel-loader',
         query: {
           presets: ['react', 'env', 'stage-0'],
-          plugins: ['react-html-attrs', 'transform-class-properties', 'transform-decorators-legacy'],
+          plugins: ['react-html-attrs', 'transform-class-properties', 'transform-decorators-legacy', 'transform-object-rest-spread'],
         },
       },
 

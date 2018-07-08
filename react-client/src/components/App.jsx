@@ -25,29 +25,10 @@ const Content = styled.div`
   }
   @media (min-width: 50em) {
      > * {
-      margin: 0 1em 0 calc(64px + 1em);
+      margin: 0 1em 0 calc(64px + 1.5em);
      }
     max-width: 100vw;
     transition: margin .25s ease-in;
-  }
-`;
-
-const ContentLabel = styled.div`
-  max-width: 100%;
-  max-width: 90vw;
-  height: 5em;
-  text-align: center;
-  align-items: stretch;
-  flex-flow: row nowrap;
-  display: flex;
-  flex-basis: 100%;
-  @media (min-width: 1200px) {
-    max-width: 1080px;
-  }
-
-  >* {
-    flex-grow: 1;
-    align-self: center;
   }
 `;
 
@@ -55,8 +36,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ingredientsDrawer: false,
       navDrawer: false,
+      route: '',
     };
   }
 
@@ -67,7 +48,7 @@ class App extends Component {
   }
 
   makeRoute = (r) => {
-    return <Route key={r.to} path={r.to} render={() => <r.route {...this.props} />} />
+    return <Route key={r.to} path={r.to} render={() => <r.route {...this.props} title={r.title} />} />
   }
 
   render() {
@@ -76,7 +57,6 @@ class App extends Component {
         <FlexContainer className="app">
           <MenuBar onClick={this.toggleDrawer} show={this.state.navDrawer} />
           <Content>
-            <ContentLabel><h3>Header1</h3></ContentLabel>
             <Route exact path="/" render={() => <Redirect to="/inventory" />} />
             {Routes.map(this.makeRoute)}
           </Content>

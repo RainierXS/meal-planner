@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { Root } from '../components/SharedStyles';
+import ContentLabel from '../components/ContentLabel';
 
 @connect((store) => ({
   recipe: store.recipe,
@@ -13,8 +14,8 @@ class Recipes extends Component{
   render() {
     return (
       <Root>
-        Recipes <br />
-        {JSON.stringify(this.props.recipe)}
+        <ContentLabel><h3>{this.props.title}</h3></ContentLabel>
+        <div>{JSON.stringify(this.props.recipe)}</div>
       </Root>
     );
   }

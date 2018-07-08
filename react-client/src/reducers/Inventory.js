@@ -4,7 +4,7 @@ import { inventory as defaultState } from './StaticData'
 
 const InventoryReducer = (state = defaultState, action) => {
   switch (action.type) {
-    case inventory.add: 
+    case inventory.add:
       const { id, quantity, unit, buyRate } = action.payload;
       return state.concat({ id, quantity, unit, buyRate }); // replace with api call in action
     case inventory.change:
