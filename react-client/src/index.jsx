@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import React from 'react';
 import { render } from 'react-dom';
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -20,8 +21,8 @@ const theme = {
   tertiary: 'rgba(148, 156, 157, 1)',
   fourth: 'rgba(128, 136, 137, 1)',
   accent: 'rgba(213, 241, 17, 1)',
-  warning: 'orangered'
-}
+  warning: 'orangered',
+};
 
 injectGlobal`
   html { height: 100%; width: 100%; }
@@ -32,7 +33,7 @@ injectGlobal`
   *, ::after, ::before {
     box-sizing: border-box;
   }
-`
+`;
 
 render(
   <Provider store={store}>
