@@ -28,9 +28,10 @@
 ## Overall Needs
 ### Front End
   - [x] Remove Material UI
-  - [ ] Add Styled Components
+  - [x] Add Styled Components
 
 ### Back End
+  - [ ] Implement edamam.com api ?maybe
   - [ ] Add Passport
   - [ ] Add Session/Cookie support
   - [ ] Add Oauth
@@ -117,6 +118,15 @@
     - [ ] Param: id will add the item to the current user's inventory with specified amount or 0
       - [ ] If id is null add a new ingredient to the database
     - [ ] Param: tags adds tags to item
+
+---
+## Ingredients
+### Front End
+  - [ ] User can search for ingredients
+  - [ ] User can view a list of ingredients they have used
+
+### Back End
+
 
 ---
 ## Recipes

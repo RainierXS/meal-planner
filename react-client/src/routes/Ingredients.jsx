@@ -1,23 +1,18 @@
-import React, { Fragment, Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Root } from '../components/SharedStyles';
 import Ingredients from '../components/Ingredients';
 import ContentLabel from '../components/ContentLabel';
 
+const IngredientsRoute = (props) => (
+  <Root className="root">
+    <ContentLabel><h3>{props.title}</h3></ContentLabel>
+    <Ingredients />
+  </Root>
+);
 
-class Inventory extends Component {
-  render() {
-    return (
-      <Root className="root">
-        <ContentLabel><h3>{this.props.title}</h3></ContentLabel>
-        <Ingredients />
-      </Root>
-    );
-  }
-}
-
-Inventory.propTypes = {
+IngredientsRoute.propTypes = {
 
 };
 
-export default Inventory;
+export default IngredientsRoute;

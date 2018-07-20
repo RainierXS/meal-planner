@@ -1,12 +1,15 @@
 const path = require('path');
 const webpack = require('webpack');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const SRC_DIR = path.join(__dirname, '/react-client/src');
 const DIST_DIR = path.join(__dirname, '/react-client/dist');
 
 // creates js file containing common code across all bundles from entry points
 const commonsPlugin = new webpack.optimize.CommonsChunkPlugin({ name: 'common' });
+
+const port = Number(process.env.PORT || 3000) // used by browsersync
 
 module.exports = {
   // multiple entry points generates multiple bundles based on paths,
@@ -17,11 +20,14 @@ module.exports = {
     filename: '[name].js',
     path: DIST_DIR,
   },
-  plugins: [commonsPlugin,
+  plugins: [
+    new BundleAnalyzerPlugin({analyzerMode: 'static'}),
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+    commonsPlugin,
     new BrowserSyncPlugin({
       host: 'localhost',
-      port: 3001,
-      proxy: 'http://localhost:3000/',
+      port: port+1,
+      proxy: `http://localhost:${port}/`,
       files: ['./react-client/dist/*.js', './react-client/dist/*.html'],
     }),
   ],

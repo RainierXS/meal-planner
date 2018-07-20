@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import { addIngredient, removeIngredient } from '../../actions/Ingredient';
-import IngredientForm from './IngredientForm';
+import HeaderForm from '../HeaderForm';
 import Ingredient from './Ingredient';
 
 const Container = styled.div`
@@ -97,7 +97,7 @@ class Inventory extends PureComponent {
     const { showButton } = this.state;
     return (
       <Container>
-        <IngredientForm onSubmit={this.handleSubmit} onChange={this.handleChange} fields={formFields} showButton={showButton} />
+        <HeaderForm onSubmit={this.handleSubmit} onChange={this.handleChange} fields={formFields} showButton={showButton} />
         {this.renderIngredients()}
       </Container>
     );

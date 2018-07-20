@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import SelectDropdown from '../SelectDropdown';
+import SelectDropdown from './SelectDropdown';
 
 const Form = styled.form`
   display: flex;
@@ -34,7 +34,17 @@ const Input = styled.input`
 const Col = styled.div`
   flex-basis: 100%;
   @media (min-width: 50em){
-    flex-basis: ${({ flexwidth }) => (flexwidth || 'inherit')}
+    ${({ flexwidth }) => {
+      if (!flexwidth) {
+        return 'flex-basis: inherit'
+      }
+      if (flexwidth === 'auto') {
+        return `flex-grow: 1;
+        flex-basis: initial`
+      } else {
+        return `flex-basis: ${flexwidth}`
+      }
+    }}
   }
 `;
 const Button = styled.button`
@@ -65,7 +75,7 @@ const Button = styled.button`
 
 `;
 
-const IngredientForm = (props) => {
+const HeaderForm = (props) => {
   const {
     onChange, onSubmit, fields, showButton
   } = props;
@@ -86,8 +96,8 @@ const IngredientForm = (props) => {
   );
 };
 
-IngredientForm.propTypes = {
+HeaderForm.propTypes = {
 
 };
 
-export default IngredientForm;
+export default HeaderForm;
