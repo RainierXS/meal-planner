@@ -102,7 +102,7 @@ class Calendar extends Component {
   }
 
   componentDidMount = () => {
-    this.props.onChange(this.state.date.format('YYYY-MM-DD'));
+    
   }
 
   handleChange = (dir) => {
@@ -114,7 +114,7 @@ class Calendar extends Component {
     } else {
       date.subtract(1, 'M');
     }
-    this.setState({ date }, () => this.props.onChange(this.state.date.format('YYYY-MM-DD')));
+    this.setState({ date });
   }
 
   render() {
@@ -142,7 +142,7 @@ class Calendar extends Component {
 }
 
 Calendar.propTypes = {
-  onChange: PropTypes.func.isRequired,
+  
 };
 
 export default Calendar;
