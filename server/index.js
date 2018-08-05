@@ -1,49 +1,42 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
 const cookieParser = require('cookie-parser');
 const sassMiddleware = require('node-sass-middleware')
 const postcssMiddleware = require('postcss-middleware');
 const autoprefixer = require('autoprefixer');
-// const items = require('../database-mysql');
-const path = require('path');
+
+const DB = require('../database-mysql');
 
 const app = express();
 
 app.set('view engine', 'ejs');
 
+// // need cookieParser middleware before we can do anything with cookies
+// TODO: setup session generation to store sessionid in cookie
+app.use(cookieParser())
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 app.use(express.static(path.resolve(__dirname, '../react-client/dist')));
-app.use('/', express.static(path.resolve(__dirname, '../react-client/dist')));
 
-// used to send query data back as response
-// const passData = (err, data, res) => {
-//   if (err) {
-//     res.sendStatus(500);
-//   } else {
-//     res.json(data);
-//   }
-// };
-
-// app.get('*', (req, res) => {
-//   //res.send(`Page not found at ${req.params['0']}`);
-//   //res.redirect('/');
-// });
-
-const port = process.env.PORT || 3000;
-// const IP = process.env.IP || '127.0.0.1';
-
+// sends server side rendered index
 app.get('/', (req, res) => {
   res.render('pages',
     {
-      title: 'Meal Planner - RainierXS',
+      title: 'ETSU PO Analytics - Main',
       path: '',
     }
   );
 });
 
-// default back to home
-app.get('*', (req, res) => res.redirect('/'));
+// default page
+app.get('*', (req, res) => {
+  res.redirect('/');
+});
+// endregion express routes
 
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
-  console.log(`listening on port ${port}`);
+  console.log(`listening on port ${port}!`);
 });
