@@ -18,7 +18,7 @@ app.use(cookieParser())
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use(express.static(path.resolve(__dirname, '../react-client/dist')));
+// app.use(express.static(path.resolve(__dirname, '../react-client/dist')));
 
 // sends server side rendered index
 app.get('/', (req, res) => {
@@ -29,11 +29,12 @@ app.get('/', (req, res) => {
     }
   );
 });
+app.use(express.static(path.resolve(__dirname, '../react-client/dist')));
 
 // default page
-// app.get('*', (req, res) => {
-//   res.redirect('/');
-// });
+app.get('*', (req, res) => {
+  res.redirect('/');
+});
 // endregion express routes
 
 const port = process.env.PORT || 3000;
