@@ -13,6 +13,7 @@ app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.resolve(__dirname, '../react-client/dist')));
+app.use('/', express.static(path.resolve(__dirname, '../react-client/dist')));
 
 // used to send query data back as response
 // const passData = (err, data, res) => {
