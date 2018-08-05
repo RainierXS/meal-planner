@@ -17,6 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // app.use(express.static(path.resolve(__dirname, '../react-client/dist')));
+app.use(express.static(path.join(__dirname, '../react-client/dist')));
 
 // sends server side rendered index
 app.get('/', (req, res) => {
@@ -27,8 +28,8 @@ app.get('/', (req, res) => {
     }
   );
 });
-app.use(express.static(path.join(__dirname, '../react-client/dist')));
 
+app.get("*", express.static(path.join(__dirname, '../react-client/dist')));
 // default page
 app.get('*', (req, res) => {
   console.log('test')
