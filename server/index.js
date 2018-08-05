@@ -6,8 +6,6 @@ const sassMiddleware = require('node-sass-middleware')
 const postcssMiddleware = require('postcss-middleware');
 const autoprefixer = require('autoprefixer');
 
-const DB = require('../database-mysql');
-
 const app = express();
 
 app.set('view engine', 'ejs');
