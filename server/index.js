@@ -31,9 +31,9 @@ app.get('/', (req, res) => {
 });
 
 // default page
-app.get('*', (req, res) => {
-  res.redirect('/');
-});
+// app.get('*', (req, res) => {
+//   res.redirect('/');
+// });
 // endregion express routes
 
 const port = process.env.PORT || 3000;
