@@ -31,6 +31,7 @@ app.use(express.static(path.join(__dirname, '../react-client/dist')));
 
 // default page
 app.get('*', (req, res) => {
+  console.log('test')
   res.redirect('/');
 });
 // endregion express routes
