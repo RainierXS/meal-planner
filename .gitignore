@@ -1,7 +1,5 @@
 node_modules
 XD
-bundle.js
-common.js
 mySQLPassword.js
 tsconfig.json
 .DS_Store
