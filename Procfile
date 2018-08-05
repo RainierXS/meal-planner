@@ -1,2 +1,2 @@
-build: npm run react-dev
+build: npm run build
 web: nodemon server/index.js

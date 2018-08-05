@@ -24,12 +24,12 @@ module.exports = {
     new BundleAnalyzerPlugin({analyzerMode: 'static', openAnalyzer: false }),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     commonsPlugin,
-    new BrowserSyncPlugin({
-      host: 'localhost',
-      port: port+1,
-      proxy: `http://localhost:${port}/`,
-      files: ['./react-client/dist/*.js', './react-client/dist/*.html'],
-    }),
+    // new BrowserSyncPlugin({
+    //   host: 'localhost',
+    //   port: port+1,
+    //   proxy: `http://localhost:${port}/`,
+    //   files: ['./react-client/dist/*.js', './react-client/dist/*.html'],
+    // }),
   ],
   module: {
     rules: [
