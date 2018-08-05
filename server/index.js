@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
     }
   );
 });
-app.use(express.static(path.resolve(__dirname, '../react-client/dist')));
+app.use(express.static(path.join(__dirname, '../react-client/dist')));
 
 // default page
 app.get('*', (req, res) => {
