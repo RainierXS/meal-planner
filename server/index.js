@@ -29,7 +29,7 @@ app.use(express.static(path.resolve(__dirname, '../react-client/dist')));
 // });
 
 const port = process.env.PORT || 3000;
-const IP = process.env.IP || '127.0.0.1';
+// const IP = process.env.IP || '127.0.0.1';
 
 app.get('/', (req, res) => {
   res.render('pages',
@@ -43,6 +43,6 @@ app.get('/', (req, res) => {
 // default back to home
 app.get('*', (req, res) => res.redirect('/'));
 
-app.listen(port, IP, () => {
+app.listen(port, () => {
   console.log(`listening on port ${port}`);
 });
