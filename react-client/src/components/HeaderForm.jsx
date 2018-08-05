@@ -34,17 +34,18 @@ const Input = styled.input`
 const Col = styled.div`
   flex-basis: 100%;
   @media (min-width: 50em){
-    ${({ flexwidth }) => {
-      if (!flexwidth) {
-        return 'flex-basis: inherit'
-      }
-      if (flexwidth === 'auto') {
-        return `flex-grow: 1;
-        flex-basis: initial`
-      } else {
-        return `flex-basis: ${flexwidth}`
-      }
-    }}
+  ${({ flexwidth }) => {
+    if (!flexwidth) {
+      return 'flex-basis: inherit';
+    }
+    if (flexwidth === 'auto') {
+      return `
+        flex-grow: 1;
+        flex-basis: initial;
+      `;
+    }
+    return `flex-basis: ${flexwidth}`;
+  }}
   }
 `;
 const Button = styled.button`

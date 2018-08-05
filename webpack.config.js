@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const SRC_DIR = path.join(__dirname, '/react-client/src');
 const DIST_DIR = path.join(__dirname, '/react-client/dist');
@@ -21,7 +21,7 @@ module.exports = {
     path: DIST_DIR,
   },
   plugins: [
-    new BundleAnalyzerPlugin({analyzerMode: 'static'}),
+    new BundleAnalyzerPlugin({analyzerMode: 'static', openAnalyzer: false }),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     commonsPlugin,
     new BrowserSyncPlugin({
