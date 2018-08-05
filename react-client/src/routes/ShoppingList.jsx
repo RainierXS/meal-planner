@@ -9,7 +9,8 @@ const ShoppingList = (props) => {
   return (
     <Root>
       <ContentLabel><h3>{props.title}</h3></ContentLabel>
-      <SelectDropdown title="Select Dropdown"/>
+      {/* <SelectDropdown title="Select Dropdown"/> */}
+      NYI
     </Root>
   );
 };

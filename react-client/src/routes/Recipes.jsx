@@ -15,7 +15,8 @@ class Recipes extends Component{
     return (
       <Root>
         <ContentLabel><h3>{this.props.title}</h3></ContentLabel>
-        <div>{JSON.stringify(this.props.recipe)}</div>
+        {/* <div>{JSON.stringify(this.props.recipe)}</div> */}
+        NYI
       </Root>
     );
   }

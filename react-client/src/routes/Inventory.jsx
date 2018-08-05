@@ -7,7 +7,8 @@ import ContentLabel from '../components/ContentLabel';
 const InventoryRoute = (props) => (
   <Root className="root">
     <ContentLabel><h3>{props.title}</h3></ContentLabel>
-    <Inventory />
+    {/* <Inventory /> */}
+    NYI
   </Root>
 );
 

@@ -57,7 +57,7 @@ class App extends Component {
         <FlexContainer className="app">
           <MenuBar onClick={this.toggleDrawer} show={this.state.navDrawer} />
           <Content>
-            <Route exact path="/" render={() => <Redirect to="/inventory" />} />
+            <Route exact path="/" render={() => <Redirect to="/ingredients" />} />
             {Routes.map(this.makeRoute)}
           </Content>
         </FlexContainer>
