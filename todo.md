@@ -1,28 +1,28 @@
 # Table of Contents
-- [Table of Contents](#table-of-contents)
-- [To Do](#to-do)
-  - [Overall Needs](#overall-needs)
-    - [Front End](#front-end)
-    - [Back End](#back-end)
-    - [Permissions](#permissions)
-  - [User login](#user-login)
-    - [Front End](#front-end)
-    - [Back End](#back-end)
-  - [Calendar](#calendar)
-    - [Front End](#front-end)
-    - [Back End](#back-end)
-  - [Inventory](#inventory)
-    - [Front End](#front-end)
-    - [Back End](#back-end)
-  - [Recipes](#recipes)
-    - [Front End](#front-end)
-    - [Back End](#back-end)
-  - [Shopping List](#shopping-list)
-    - [Front End](#front-end)
-    - [Back End](#back-end)
-  - [Profile Page](#profile-page)
-    - [Front End](#front-end)
-    - [Back End](#back-end)
+- [Table of Contents](#Table-of-Contents)
+- [To Do](#To-Do)
+  - [Overall Needs](#Overall-Needs)
+    - [Front End](#Front-End)
+    - [Back End](#Back-End)
+    - [Permissions](#Permissions)
+  - [User login](#User-login)
+    - [Front End](#Front-End-1)
+    - [Back End](#Back-End-1)
+  - [Calendar](#Calendar)
+    - [Front End](#Front-End-2)
+    - [Back End](#Back-End-2)
+  - [Ingredients](#Ingredients)
+    - [Front End](#Front-End-3)
+    - [Back End](#Back-End-3)
+  - [Recipes](#Recipes)
+    - [Front End](#Front-End-4)
+    - [Back End](#Back-End-4)
+  - [Shopping List](#Shopping-List)
+    - [Front End](#Front-End-5)
+    - [Back End](#Back-End-5)
+  - [Profile Page](#Profile-Page)
+    - [Front End](#Front-End-6)
+    - [Back End](#Back-End-6)
 
 # To Do
 ## Overall Needs
@@ -52,12 +52,13 @@
   - [ ] Oauth login options
 
 ### Back End
-  - [ ] Create User table
-    - [ ] Columns: id, email, username, password\_hash, salt, image, birthdate, permissions, profile\_rules, note
-      - [ ] Profile rules control what information is available publicly on profile page
+  - [x] Create User table
+    - [x] Columns: id, email, username, password\_hash, name, image, bio, city, birthdate, profile\_rules, note
+      - Profile rules control what information is available publicly on profile page
+  - [x] Create permissions table
+    - [x] Columns: permission, user_id
   - [ ] Create register (POST) route to add new users to database
-    - [ ] Generate salt on register for password
-    - [ ] Hash Passwords with salt and pepper
+    - [ ] Hash Passwords with salt and pepper on objection model
   - [ ] Create auth (POST) route to allow users to login
     - [ ] Compare hashed password to login password
     - [ ] User login session via Oauth
@@ -92,7 +93,7 @@
     - [ ] Route recieves param that specifies if meal or exercise
 
 ---
-## Inventory
+## Ingredients
 ### Front End
   - [ ] User can filter ingredients list by search, product type, or tags
   - [ ] User can add new ingredients to the database if has permission
@@ -104,10 +105,14 @@
       - [ ] Recommend unit of measurement based on type
 
 ### Back End
-  - [ ] Create ingredient_type table
-    - [ ] Columns: id, name, added\_by\_user\_id, flag (0:disabled, 1:active, 2:review)
-  - [ ] Create ingredient table
-    - [ ] Columns: id, name, type, added\_by\_user\_id
+  - [x] Create type table
+    - [x] Columns: id, name, created_by, flag (0:disabled, 1:active, 2:review)
+  - [x] Create unit table
+    - [x] Columns: id, name, metric, metric_conversion, created_by, flag (0:disabled, 1:active, 2:review)
+  - [x] Create ingredient table
+    - [x] Columns: id, name, type_id, default_unit_id,created_by
+  - [x] Create user has ingredient table
+    - [x] Columns: user_id, ingredient_id, unit_id, inventory
   - [ ] Create itype (GET) route that pulls list of ingredient types
   - [ ] Create itype (POST) route that adds a type to database
     - [ ] Type is flagged as 2:review by default and requires admin approval
@@ -118,15 +123,6 @@
     - [ ] Param: id will add the item to the current user's inventory with specified amount or 0
       - [ ] If id is null add a new ingredient to the database
     - [ ] Param: tags adds tags to item
-
----
-## Ingredients
-### Front End
-  - [ ] User can search for ingredients
-  - [ ] User can view a list of ingredients they have used
-
-### Back End
-
 
 ---
 ## Recipes
