@@ -28,7 +28,7 @@
     "concurrently": "^3.5.1",
     "css-loader": "^0.28.8",
     "file-loader": "^1.1.6",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.1",
     "nodemon": "^1.17.5",
     "sass-loader": "^7.0.3",
     "style-loader": "^0.19.1",
